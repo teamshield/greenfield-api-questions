@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It renders App 1`] = `
+<div
+  className="MuiContainer-root MuiContainer-maxWidthLg"
+>
+  <header>
+    <header
+      className="MuiPaper-root MuiPaper-elevation4 MuiAppBar-root MuiAppBar-positionSticky sc-kgoBCf jRbFr MuiAppBar-colorPrimary"
+    >
+      Team Uru
+    </header>
+  </header>
+  <main />
+</div>
+`;
