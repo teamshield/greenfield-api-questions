@@ -4,7 +4,7 @@
 
 <!-- INSERT GIF OF OVERALL APP HERE -->
 
-A four person dev team created a mock shopping app focusing on the front-end using React-Redux as the primary libraries. Material-UI was leveraged for styling and icons. React-Router was used for client-side routing. This project was built in two weeks using guidelines from a mock buisness requirements document. The given data supplied to the team from an API can be viewed at the individual components [README](#Components)
+A two person dev team created ...
 
 <p align="center">
 <img src="documentation/logos.png">
@@ -19,8 +19,7 @@ A four person dev team created a mock shopping app focusing on the front-end usi
 1. [Installing Dependencies](#Installing-Dependencies)
 2. [Technologies Used](#Technologies-Used)
 3. [Requirements](#Requirements)
-4. [Components](#Components)
-5. [Notes](#Notes)
+4. [Notes](#Notes)
 
 ## Installing-Dependencies
 
@@ -56,7 +55,6 @@ A four person dev team created a mock shopping app focusing on the front-end usi
 
 > Testing Suite
 
-- [Puppeteer](https://pptr.dev/)
 - [Jest](https://jestjs.io/docs/en/api)
 
 ## Requirements
@@ -65,32 +63,9 @@ Ensure that the following modules are installed before running `npm install`
 
 - Node v10.13.0 or higher
 
-## Components
+## API
 
-The seperate team member was in charge of the 4 main components seen on the app. Each team member utalized the above listed technologies.
-
-### Product Overview
-
-> Changing Style
-> ![](documentation/Overview/changeStyles.gif)
-
-> Add SKU to cart
-> ![](documentation/Overview/addToCart.gif)
-
-> Carousel Demonstration
-> ![](documentation/Overview/carousel.gif)
-
-### Related
-
-![](documentation/Related/related-products.gif)
-
-### Questions/Answers
-
-- For more information regarding the Questions portion for this app, please refer to the [ Questions README](documentation/Questions/README.md)
-
-### Reviews
-
-- For more information regarding the Reviews portion for this app, please refer to the [ Reviews README](documentation/Reviews/README.md)
+> Comments here
 
 ## Notes
 

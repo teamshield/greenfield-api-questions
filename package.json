@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/teamuru/greenfieldApp.git"
+    "url": "git+https://github.com/teamshield/greenfield-api-questions"
   },
-  "author": "Cali Tabilas Brian Nelson Robert Battaglia Hongwei Qin",
+  "author": "Cali Tabilas",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/teamuru/greenfieldApp/issues"
+    "url": "https://github.com/teamshield/greenfield-api-questions/issues"
   },
-  "homepage": "https://github.com/teamuru/greenfieldApp#readme",
+  "homepage": "https://github.com/teamshield/greenfield-api-questions#readme",
   "dependencies": {
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
