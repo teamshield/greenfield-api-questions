@@ -1,5 +1,5 @@
-let router = require('express').Router();
-// let controller = require('./controllers.js');
+const router = require('express').Router();
+
 const {
   dummyController,
   getQuestions,
@@ -13,7 +13,6 @@ const {
 } = require('./controllers.js');
 
 router
-  // .get('/test', controller.dummyController)
   .get('/test', dummyController)
 
   // questios - based on productId

@@ -1,7 +1,8 @@
 const queries = require('./queries');
 
 const dummyController = (req, res) => {
-  res.json({ info: 'Node.js, Express, and Postgres API' });
+  // res.json({ info: 'Node.js, Express, and Postgres API' });
+  res.send(`fixed start script`);
 };
 
 const getQuestions = (res, req) => {
@@ -38,12 +39,12 @@ const reportAnswer = (req, res) => {
 
 module.exports = {
   dummyController,
-  getQuestions
-  //   getAnswers,
-  //   postQuestion,
-  //   postAnswer,
-  //   helpfulQuestion,
-  //   reportQuestion,
-  //   helpfulAnswer,
-  //   reportAnswer
+  getQuestions,
+  getAnswers,
+  postQuestion,
+  postAnswer,
+  helpfulQuestion,
+  reportQuestion,
+  helpfulAnswer,
+  reportAnswer
 };
