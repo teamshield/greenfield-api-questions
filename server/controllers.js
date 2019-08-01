@@ -11,24 +11,45 @@ const pool = new Pool({
 
 // const queries = require('./queries');
 
-const dummyController = (req, res) => {
-  const { body, name, email } = req.body;
-  let valArr = [body, name, email];
+// test req.body for post:
+// {
+// 	"body": "testbody",
+// 	"name": "testname",
+// 	"email": "testemail"
+// }
 
-  const queryEntry = `INSERT INTO questions (question_body, asker_name, asker_email) VALUES (body, name, email)`;
-  pool.query(queryEntry, valArr, (error, results) => {
+const dummyController = (req, res) => {
+  // const { body, name, email } = req.body;
+  // let valArr = [body, name, email];
+  // console.log('req.body => ', valArr);
+  const queryEntry = `SELECT * FROM questions WHERE product_id = 1 ORDER BY question_date DESC`;
+
+  pool.query(queryEntry, (error, results) => {
     if (error) {
-      throw error;
+      console.log('error', error);
     }
-    res.status(200).json(valArr);
+    console.log('results', results);
+    res.status(200).json(results.rows);
   });
+
+  // TEST GETALL:
+  // const query = `SELECT * FROM questions WHERE question_body = 'testbody`;
+
+  // pool.query(queryEntry, (error, results) => {
+  //   if (err) {
+  //     console.log('err', err);
+  //   }
+  //   res.status(200).json(results.rows);
+  // });
 };
 
 const getQuestions = (res, req) => {
   // TODO: fix this query, currently not handling the answers and photos object
 
   // FIXME: this querry will need to be modified so that the sort can change based on the req.body
-  const queryEntry = `SELECT * FROM questions AND product_id = 1 ORDER BY question_date DESC`;
+
+  // Add a condition where helpfulness != 0
+  const queryEntry = `SELECT * FROM questions AND product_id = 1 AND reported > 0 ORDER BY question_date DESC`;
   pool.query(queryEntry, (error, results) => {
     let questionsArr = [];
 
@@ -65,7 +86,7 @@ const getQuestions = (res, req) => {
 
     // console.log(resObj);
     // res.status(200).json(resObj);
-    res.send(results.rows);
+    res.statu(200).send(results.rows);
   });
 };
 
@@ -104,31 +125,40 @@ const postQuestion = (res, req) => {
   // TODO: fix adding values
   const { body, name, email } = req.body;
   let valArr = [body, name, email];
+  console.log('req.body => ', req.body);
 
-  const queryEntry = `INSERT INTO questions (question_body, asker_name, asker_email) VALUES ()`;
+  const queryEntry = `INSERT INTO questions (question_body, asker_name, asker_email) VALUES (?, ?, ?)`;
   pool.query(queryEntry, valArr, (error, results) => {
     if (error) {
-      throw error;
+      console.log('error', error);
     }
-    res.status(200).json(valArr);
+    res.status(201).json(valArr);
   });
 };
 
 const postAnswer = (req, res) => {
   // TODO: fix this query
-  const queryEntry = `SELECT * FROM answers WHERE question_id = 1 AND product_id = 1 ORDER BY question_date DESC`;
-  pool.query(queryEntry, (error, results) => {
+
+  const { body, name, email, photos } = req.body;
+  const valArr = [body, name, email, photos];
+
+  const queryEntry = `INSERT INTO answers (body, answerer_name, answerer_email) VALUES (?, ?, ?, ?)`;
+  pool.query(queryEntry, valArr, (error, results) => {
     if (error) {
       throw error;
     }
-    res.status(200).send(results.rows);
+    res.status(201).send(valArr);
   });
 };
 
 const helpfulQuestion = (req, res) => {
   // TODO: fix this query
-  const queryEntry = `SELECT * FROM answers WHERE question_id = 1 AND product_id = 1 ORDER BY question_date DESC`;
-  pool.query(queryEntry, (error, results) => {
+
+  const question_id = parseInt(req.params.id);
+  let { helpful } = req.body;
+
+  const queryEntry = `UPDATE questions SET helpful = $1 WHERE question_id = $2`;
+  pool.query(queryEntry, [helpful++, question_id], (error, results) => {
     if (error) {
       throw error;
     }
@@ -138,8 +168,14 @@ const helpfulQuestion = (req, res) => {
 
 const reportQuestion = (req, res) => {
   // TODO: fix this query
-  const queryEntry = `SELECT * FROM answers WHERE question_id = 1 AND product_id = 1 ORDER BY question_date DESC`;
-  pool.query(queryEntry, (error, results) => {
+
+  // TODO: if reported != 0 do not send as part of GET
+  const question_id = parseInt(req.params.id);
+  const { reported } = req.body;
+
+  const queryEntry = `UPDATE questions SET helpful = $1 WHERE question_id = $2`;
+
+  pool.query(queryEntry, [reported, question_id], (error, results) => {
     if (error) {
       throw error;
     }
