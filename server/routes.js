@@ -14,6 +14,7 @@ const {
 
 router
   .get('/test', dummyController)
+  .get('/test/:question_id', dummyController)
   .post('/test', dummyController)
 
   // questios - based on productId

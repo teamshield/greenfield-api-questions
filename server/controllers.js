@@ -22,13 +22,16 @@ const dummyController = (req, res) => {
   // const { body, name, email } = req.body;
   // let valArr = [body, name, email];
   // console.log('req.body => ', valArr);
+
+  const { id } = req.params.question_id;
+  console.log('id', id);
+
   const queryEntry = `SELECT * FROM questions WHERE product_id = 1 ORDER BY question_date DESC`;
 
   pool.query(queryEntry, (error, results) => {
     if (error) {
       console.log('error', error);
     }
-    console.log('results', results);
     res.status(200).json(results.rows);
   });
 
