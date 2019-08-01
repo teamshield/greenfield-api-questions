@@ -13,10 +13,11 @@ const {
 } = require('./controllers.js');
 
 router
-  .get('/test', dummyController, getQuestions)
+  .get('/test', dummyController)
+  .post('/test', dummyController)
 
   // questios - based on productId
-  .get('/qa/:product_id')
+  .get('/qa/:product_id', getQuestions)
   // answers - based on questionId
   .get('/qa/:question_id/answers', getAnswers)
 
