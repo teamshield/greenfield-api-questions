@@ -1,8 +1,28 @@
-const queries = require('./queries');
+const Pool = require('pg').Pool;
+const psql_pwd = require('../config.js');
+
+const pool = new Pool({
+  user: 'me',
+  host: 'localhost',
+  database: 'postgres',
+  password: psql_pwd,
+  port: 5432
+});
+
+// const queries = require('./queries');
 
 const dummyController = (req, res) => {
   // res.json({ info: 'Node.js, Express, and Postgres API' });
-  res.send(`fixed start script`);
+  // res.send(`fixed start script`);
+  pool.query(
+    'SELECT * FROM questions WHERE question_id = 2',
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).send(results.rows);
+    }
+  );
 };
 
 const getQuestions = (res, req) => {

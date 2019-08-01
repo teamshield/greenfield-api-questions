@@ -1,8 +1,16 @@
+-- STARTING POSTGRES SERVER AND LOG INTO POSTGRES AS "me"
+-- brew services start postgresql
+-- psql -d postgres -U me
+
+-- Connect to our postgres database
+
 -- Questions Schema
 -- CREATE SCHEMA IF NOT EXISTS questions AUTHORIZATION me;
 -- id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful
 DROP DATABASE api;
 CREATE DATABASE api;
+
+
 
 -- 8 headers, 3521634 entries
 -- id, product_id, body, date_written, asker_name, asker_email, reported, helpful
@@ -47,3 +55,17 @@ SELECT
   COUNT(*)
 FROM
   answers
+
+-- id, answer_id, url
+CREATE TABLE answer_photos
+(
+  id INT,
+  answer_id INT,
+  url TEXT
+);
+
+--  COPY answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/answers_photos.csv' DELIMITERS ',' CSV header;
+SELECT
+  COUNT(*)
+FROM
+  answer_photos
