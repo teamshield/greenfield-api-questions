@@ -15,7 +15,8 @@ const dummyController = (req, res) => {
   // res.json({ info: 'Node.js, Express, and Postgres API' });
   // res.send(`fixed start script`);
   pool.query(
-    'SELECT * FROM questions WHERE question_id = 2',
+    // 'SELECT * FROM questions WHERE question_id < 10',
+    'SELECT * FROM questions WHERE question_id < 10 AND product_id = 1 ORDER BY question_date DESC ',
     (error, results) => {
       if (error) {
         throw error;
