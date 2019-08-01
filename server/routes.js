@@ -1,7 +1,21 @@
-const router = require('express').Router();
-const controller = require('./controllers.js');
+let router = require('express').Router();
+// let controller = require('./controllers.js');
+const {
+  dummyController,
+  getQuestions,
+  getAnswers,
+  postQuestion,
+  postAnswer,
+  helpfulQuestion,
+  reportQuestion,
+  helpfulAnswer,
+  reportAnswer
+} = require('./controllers.js');
 
 router
+  // .get('/test', controller.dummyController)
+  .get('/test', dummyController)
+
   // questios - based on productId
   .get('/qa/:product_id')
   // answers - based on questionId
@@ -20,3 +34,5 @@ router
   .put('/qa/answer/:answer_id/helpful')
   // answer - report
   .put('/qa/answer/:answer_id/report');
+
+module.exports = router;
