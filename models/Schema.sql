@@ -8,26 +8,30 @@ CREATE DATABASE api;
 -- id, product_id, body, date_written, asker_name, asker_email, reported, helpful
 CREATE TABLE questions
 (
-  ID SERIAL PRIMARY KEY,
-  product_id INT,
   question_id INT,
+  product_id INT,
   question_body TEXT,
   question_date TEXT,
   asker_name TEXT,
   asker_email TEXT,
-  question_helpfulness INT,
   reported INT,
-  helpfulness INT
-)
+  helpful INT
+);
+
+-- Count the number of rows
+SELECT
+  COUNT(*)
+FROM
+  questions
 
 -- COPY questions FROM '/Users/charmainetabilas/Desktop/apiCSVs/questions.csv' DELIMITERS ',' CSV header;
 
--- HEADERS
+-- HEADERS, 12392946 rows
 -- id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful
 CREATE TABLE answers
 
 (
-  ID SERIAL PRIMARY KEY,
+
   question_id INT,
   body TEXT,
   date DATE,
@@ -37,4 +41,9 @@ CREATE TABLE answers
   question_helpfulness INT
 );
 
+
 -- COPY answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/answers.csv' DELIMITERS ',' CSV header;
+SELECT
+  COUNT(*)
+FROM
+  answers
