@@ -39,14 +39,15 @@ FROM
 CREATE TABLE answers
 
 (
-
+  id INT,
   question_id INT,
   body TEXT,
   date DATE,
   answerer_name TEXT,
   answerer_email TEXT,
   reported INT,
-  question_helpfulness INT
+  -- TODO: reseed the database so it has this correct key, WAS question_helpfulness INT
+  helpful INT
 );
 
 
