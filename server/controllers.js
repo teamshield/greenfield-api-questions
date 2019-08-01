@@ -25,7 +25,18 @@ const dummyController = (req, res) => {
       results: answersArr
     };
 
-    results.rows.forEach((answer) => {});
+    results.rows.forEach((answer) => {
+      const answerObj = {
+        answer_id: answer.id,
+        body: answer.body,
+        date: answer.date,
+        answerer_name: answer.answerer_name,
+        email: answer.answerer_email,
+        helpfulness: answer.question_helpfulness,
+        photos: []
+      };
+      answersArr.push(answerObj);
+    });
 
     if (error) {
       throw error;
