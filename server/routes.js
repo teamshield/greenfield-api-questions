@@ -18,7 +18,8 @@ router
   .post('/test', dummyController)
 
   // questios - based on productId
-  .get('/qa/:product_id', getQuestions)
+  // .get('/qa/:product_id', getQuestions)
+  .get('/qa', getQuestions)
   // answers - based on questionId
   .get('/qa/:question_id/answers', getAnswers)
 

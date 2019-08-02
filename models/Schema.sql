@@ -70,7 +70,9 @@ VALUES
    ;
 
 
-
+SELECT *
+FROM answers ARRAY_AGG(url)
+answer_photos LEFT JOIN id USING answer_id;
 
 
 

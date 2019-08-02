@@ -1,0 +1,32 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:latest'
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_DB=api
+      - POSTGRES_PASSWORD=TkY1S361HFaF
+    volumes:
+      - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./data:/docker-entrypoint-initdb.d/csv
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: './server'
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - '4000:4000'
+    environment:
+      - PGUSER=root
+      - PGHOST=postgres
+      - PGDATABASE=api
+      - PGPASSWORD=TkY1S361HFaF
+      - PGPORT=5432
+volumes:
+  database_data:
+    driver: local
