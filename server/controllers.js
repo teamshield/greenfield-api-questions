@@ -4,7 +4,7 @@ const psql_pwd = require('../config.js');
 const pool = new Pool({
   user: 'me',
   host: 'localhost',
-  database: 'postgres',
+  database: 'api',
   password: psql_pwd,
   port: 5432
 });
