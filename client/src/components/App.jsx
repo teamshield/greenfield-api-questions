@@ -16,4 +16,4 @@ class App extends Component {
   }
 }
 
-export default App;
+import React from 'react';

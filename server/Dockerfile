@@ -1,7 +1,7 @@
 # Use and existing docker image as a base
 
 # Base image
-FROM alpine
+# FROM alpine
 
 # DL and I dependency
 # apk is a package manager 
@@ -29,3 +29,11 @@ FROM alpine
 
 # Tell image what to do when it starts as a container
 # CMD ["redis-server"]
+
+
+FROM node:10.13-alpine
+WORKDIR /app
+COPY ./package.json ./
+RUN npm install
+COPY . .
+CMD ["npm", "start"]
