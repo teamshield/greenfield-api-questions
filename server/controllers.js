@@ -23,16 +23,17 @@ const dummyController = (req, res) => {
   // let valArr = [body, name, email];
   // console.log('req.body => ', valArr);
 
-  const { id } = req.params.question_id;
-  console.log('id', id);
+  // const { id } = req.params.question_id;
+  // console.log('id', id);
 
-  const queryEntry = `SELECT * FROM questions WHERE product_id = 1 ORDER BY question_date DESC`;
+  // TODO: change limit r something to that effect
+  const queryEntry = `SELECT * FROM questions WHERE product_id = 1 AND reported = 0 ORDER BY question_date DESC LIMIT 5`;
 
   pool.query(queryEntry, (error, results) => {
     if (error) {
       console.log('error', error);
     }
-    res.status(200).json(results.rows);
+    res.json(results.rows);
   });
 
   // TEST GETALL:
@@ -46,16 +47,17 @@ const dummyController = (req, res) => {
   // });
 };
 
-const getQuestions = (res, req) => {
+const getQuestions = (req, res) => {
   // TODO: fix this query, currently not handling the answers and photos object
-
   // FIXME: this querry will need to be modified so that the sort can change based on the req.body
-
   // Add a condition where helpfulness != 0
-  const queryEntry = `SELECT * FROM questions AND product_id = 1 AND reported > 0 ORDER BY question_date DESC`;
+  const queryEntry = `SELECT * FROM questions ARRAY_AGG(url) answer_photos`;
+  //  AND reported = 0 ORDER BY question_date DESC LIMIT 5`;
   pool.query(queryEntry, (error, results) => {
+    console.log(results);
+    /*
     let questionsArr = [];
-
+    console.log('results', results);
     results.rows.forEach((question) => {
       console.log(question);
       const questObj = {
@@ -82,18 +84,17 @@ const getQuestions = (res, req) => {
       product_id: results.rows[0]['product_id'],
       results: questionsArr
     };
-
     if (error) {
-      throw error;
+      console.log('error in GetQuestions', error);
     }
+    res.status(200).json(resObj);
+*/
 
-    // console.log(resObj);
-    // res.status(200).json(resObj);
-    res.statu(200).send(results.rows);
+    res.send(results);
   });
 };
 
-const getAnswers = (res, req) => {
+const getAnswers = (req, res) => {
   let answersArr = [];
 
   const resObj = {
@@ -103,28 +104,31 @@ const getAnswers = (res, req) => {
     results: answersArr
   };
 
-  results.rows.forEach((answer) => {
-    const answerObj = {
-      answer_id: answer.id,
-      body: answer.body,
-      date: answer.date,
-      answerer_name: answer.answerer_name,
-      email: answer.answerer_email,
-      helpfulness: answer.question_helpfulness,
-      photos: []
-    };
-    answersArr.push(answerObj);
+  pool.query(queryEntry, valArr, (error, results) => {
+    if (error) {
+      console.log('error', error);
+    }
+    console.log(results);
+    // results.rows.forEach((answer) => {
+    //   const answerObj = {
+    //     answer_id: answer.id,
+    //     body: answer.body,
+    //     date: answer.date,
+    //     answerer_name: answer.answerer_name,
+    //     email: answer.answerer_email,
+    //     helpfulness: answer.question_helpfulness,
+    //     photos: []
+    //   };
+    //   answersArr.push(answerObj);
+    // });
   });
-
-  if (error) {
-    throw error;
-  }
+  res.status(200).json(resObj);
 
   // res.status(200).send(results.rows);
-  res.status(200).json(resObj);
+  // res.status(200).json(resObj);
 };
 
-const postQuestion = (res, req) => {
+const postQuestion = (req, res) => {
   // TODO: fix adding values
   const { body, name, email } = req.body;
   let valArr = [body, name, email];

@@ -30,9 +30,14 @@
 # Tell image what to do when it starts as a container
 # CMD ["redis-server"]
 
+# From tutorial
+# FROM alpine
+# RUN npm install
+# CMD ["npm", "start"]
 
+# Should work
 FROM node:10.13-alpine
-WORKDIR /app
+# WORKDIR /app
 COPY ./package.json ./
 RUN npm install
 COPY . .
