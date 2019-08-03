@@ -1,14 +1,14 @@
 const db = require('../database.js');
 
 module.exports = {
-  answerModel: (question_id, count) => {
+  getAnswers: (question_id, count) => {
     return db.any(
       `SELECT answer_id, body, date, answerer_name, helpfulness, photos 
         FROM answers WHERE question_id = $1 AND report = 0 limit $2`,
       [question_id, count]
     );
   },
-  questionModel: (product_id, count, data) => {
+  getQuestions: (product_id, count, data) => {
     return db
       .any(
         'SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2',

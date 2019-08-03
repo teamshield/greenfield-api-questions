@@ -1,5 +1,5 @@
 // const model = require('../models/models.js');
-const { answerModel, questionModel } = require('../models/models.js');
+const models = require('../models/models.js');
 
 module.exports = {
   getQuestions: (req, res) => {
@@ -10,7 +10,7 @@ module.exports = {
       results: []
     };
 
-    answerModel
+    models
       .getQuestions(product_id, count, data)
       .then(() => {
         console.timeEnd();
@@ -32,7 +32,7 @@ module.exports = {
     console.time();
     const { question_id, page = 1, count = 5 } = req.params;
 
-    questionModel
+    models
       .getAnswers(question_id, count)
       .then((result) => {
         let data = {
