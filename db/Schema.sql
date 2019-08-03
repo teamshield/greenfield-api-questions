@@ -1,6 +1,6 @@
 -- STARTING POSTGRES SERVER AND LOG INTO POSTGRES AS "me"
 -- brew services start postgresql
--- psql -d postgres -U me
+-- psql -d api -U me
 
 -- Connect to our postgres database
 
