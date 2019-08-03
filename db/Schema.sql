@@ -68,9 +68,8 @@ WITH
 -- COPY answers FROM '/Users/charmainetabilas/Desktop/greenfieldApp-api-questions/apiCSVs/answers.csv' DELIMITERS ',' CSV header;
 
 -- Altering answers to add a answer_photos coluumn
-ALTER TABLE table_name answers;
-
-ALTER TABLE answers ADD COLUMN photos TEXT [];
+ALTER TABLE answers
+ADD COLUMN photos jsonb[] DEFAULT '{}'::jsonb[];
 
 
 SELECT
