@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "seed": "node --max-old-space-size=8192 seedData.js"
+    "seed": "node seedData.js"
   },
   "repository": {
     "type": "git",
