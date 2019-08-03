@@ -19,16 +19,11 @@ let render = fs.createReadStream(
 render
   .pipe(csv.parse({ headers: true }))
   .on('data', (row) => {
-    // console.log('row', row);
-
     let photo = JSON.stringify({ id: row.id, url: row[' url'] });
-
-    // console.log('photo \n', photo, '\n\n');
 
     let queryEntry = `UPDATE answers SET photos = photos || $2::JSONB WHERE answer_id = $1;`;
 
     let arrEntry = [row[' answer_id'], photo];
-    // console.log('arrEntry \n', arrEntry, '\n\n');
 
     db.none(queryEntry, arrEntry)
       .then((results) => {
@@ -36,7 +31,7 @@ render
         if (count % 100 === 0) {
           console.log(`count: `, count);
         }
-        console.log(`hi`);
+        // console.log(`hi`);
       })
       .catch((err) => {
         console.log('after quesry err \n', err, '\n\n');
