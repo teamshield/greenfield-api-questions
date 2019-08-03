@@ -3,6 +3,22 @@ const models = require('../models/models.js');
 // Controller for Testing purposes
 const dummyController = (req, res) => {
   console.time();
+  const { product_id, page = 1, count = 5 } = req.params;
+  let data = {
+    product_id: product_id,
+    results: []
+  };
+
+  models
+    .getQuestions(product_id, count, data)
+    .then(() => {
+      console.timeEnd();
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 };
 
 // Get Controllers
