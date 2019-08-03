@@ -10,9 +10,8 @@ A two person dev team created ...
 <img src="documentation/logos.png">
 </p>
 
-> - 🎣 React Hooks - Alongside Redux, each team member implemented hooks in their component
-> - 🎭 Unit, Integration and End to End tests
-> - 📦 Webpack Build
+> - 🐘 Postgres
+> - 🐋 Docker
 
 ## Table of Contents
 
@@ -37,17 +36,12 @@ A two person dev team created ...
 
 ## Technologies-Used
 
-> Front-End
-
-- [React](https://reactjs.org/)
-- [Redux](https://redux.js.org/)
-- [Material-UI](https://material-ui.com/)
-- [React-Router](https://reacttraining.com/react-router/)
-
 > Back-End
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com)
+  <!-- - [Postgres] -->
+  <!-- - [Mongo] -->
 
 > Continuous Integration
 

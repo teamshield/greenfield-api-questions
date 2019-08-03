@@ -1,5 +1,18 @@
 const router = require('express').Router();
 
+// Reference to old contorllers
+// const {
+//   dummyController,
+//   getQuestions,
+//   getAnswers,
+//   postQuestion,
+//   postAnswer,
+//   helpfulQuestion,
+//   reportQuestion,
+//   helpfulAnswer,
+//   reportAnswer
+// } = require('./controllersDELETE.js/index.js');
+
 const {
   dummyController,
   getQuestions,
@@ -10,16 +23,16 @@ const {
   reportQuestion,
   helpfulAnswer,
   reportAnswer
-} = require('./controllers.js');
+} = require('./controllers/controller.js');
 
 router
   .get('/test', dummyController)
-  .get('/test/:question_id', dummyController)
+  .get('/test/:product_id', dummyController)
   .post('/test', dummyController)
 
-  // questios - based on productId
+  // questions - based on productId
   // .get('/qa/:product_id', getQuestions)
-  .get('/qa', getQuestions)
+  .get('/qa/:product_id', getQuestions)
   // answers - based on questionId
   .get('/qa/:question_id/answers', getAnswers)
 
