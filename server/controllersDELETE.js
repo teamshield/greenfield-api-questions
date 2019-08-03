@@ -55,7 +55,7 @@ const getQuestions = (req, res) => {
   //  AND reported = 0 ORDER BY question_date DESC LIMIT 5`;
   pool.query(queryEntry, (error, results) => {
     console.log(results);
-    /*
+    // /*
     let questionsArr = [];
     console.log('results', results);
     results.rows.forEach((question) => {
@@ -88,7 +88,7 @@ const getQuestions = (req, res) => {
       console.log('error in GetQuestions', error);
     }
     res.status(200).json(resObj);
-*/
+// */
 
     res.send(results);
   });

@@ -36,17 +36,12 @@ A two person dev team created ...
 
 ## Technologies-Used
 
-> Front-End
-
-- [React](https://reactjs.org/)
-- [Redux](https://redux.js.org/)
-- [Material-UI](https://material-ui.com/)
-- [React-Router](https://reacttraining.com/react-router/)
-
 > Back-End
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com)
+  <!-- - [Postgres] -->
+  <!-- - [Mongo] -->
 
 > Continuous Integration
 

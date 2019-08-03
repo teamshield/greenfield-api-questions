@@ -2,23 +2,24 @@ const models = require('../models/models.js');
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
+  res.send('hit');
   console.time();
-  const { product_id, page = 1, count = 5 } = req.params;
-  let data = {
-    product_id: product_id,
-    results: []
-  };
+  // const { product_id, page = 1, count = 5 } = req.params;
+  // let data = {
+  //   product_id: product_id,
+  //   results: []
+  // };
 
-  models
-    .getQuestions(product_id, count, data)
-    .then(() => {
-      console.timeEnd();
-      res.send(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  // models
+  //   .getQuestions(product_id, count, data)
+  //   .then(() => {
+  //     console.timeEnd();
+  //     res.send(data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.sendStatus(500);
+  //   });
 };
 
 // Get Controllers
@@ -106,3 +107,10 @@ module.exports = {
   helpfulAnswer,
   reportAnswer
 };
+
+//  "csv-stream": "^0.2.0",
+// "fast-csv": "^3.4.0",
+// "papaparse": "^5.0.1",
+// "pg": "^7.12.0",
+// "pg-copy-streams": "^2.2.2",
+// "pg-promise": "^9.0.0"
