@@ -21,22 +21,37 @@ let render = fs.createReadStream(
 render
   .pipe(csv.parse({ headers: true }))
   .on('data', (row) => {
-    console.log('row', row);
+    // console.log('row', row);
 
     let photo = JSON.stringify({ id: row.id, url: row[' url'] });
 
-    let queryEntry = `UPDATE answers SET photos = photos || $2::jsonb WHERE answer_id = $1;`;
+    // console.log('photo \n', photo, '\n\n');
+
+    let queryEntry = `UPDATE answers SET photos = photos || $2::JSONB WHERE answer_id = $1;`;
 
     let arrEntry = [row[' answer_id'], photo];
-    db.query(queryEntry, arrEntry, (err, result) => {
-      if (err) {
-        console.log(`on data err: \n`, err);
-      }
-      count++;
-      if ((count % 100, 000 === 0)) {
-        console.log(count);
-      }
-    });
+    // console.log('arrEntry \n', arrEntry, '\n\n');
+
+    db.none(queryEntry, arrEntry)
+      .then((results) => {
+        count++;
+        if (count % 100 === 0) {
+          console.log(`count: `, count);
+        }
+        console.log(`hi`);
+      })
+      // (err, result) => {
+      //   if (err) {
+      //     console.log(`on data err: \n`, err);
+      //   } else {
+      //     console.log('hi');
+      //     count++;
+      //     if (count % 10 === 0) console.log(`count`, count);
+      //   }
+      // })
+      .catch((err) => {
+        console.log('after quesry err \n', err, '\n\n');
+      });
   })
   .on('end', () => {
     console.log('Completed adding photos');
