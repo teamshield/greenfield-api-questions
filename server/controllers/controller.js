@@ -84,20 +84,24 @@ const postAnswer = (req, res) => {
 
 // Put Questions
 const helpfulQuestion = (req, res) => {
-  //
+  console.time();
+  console.timeEnd();
 };
 
 const reportQuestion = (req, res) => {
-  //
+  console.time();
+  console.timeEnd();
 };
 
 // Put Answers
 const helpfulAnswer = (req, res) => {
-  //
+  console.time();
+  console.timeEnd();
 };
 
 const reportAnswer = (req, res) => {
-  //
+  console.time();
+  console.timeEnd();
 };
 
 module.exports = {
@@ -111,10 +115,3 @@ module.exports = {
   helpfulAnswer,
   reportAnswer
 };
-
-//  "csv-stream": "^0.2.0",
-// "fast-csv": "^3.4.0",
-// "papaparse": "^5.0.1",
-// "pg": "^7.12.0",
-// "pg-copy-streams": "^2.2.2",
-// "pg-promise": "^9.0.0"

@@ -6,7 +6,6 @@ const db = require('./server/database.js');
 
 let count = 0;
 
-//
 let options = {
   highWaterMark: 256 * 1024
 };
@@ -31,7 +30,6 @@ render
         if (count % 100 === 0) {
           console.log(`count: `, count);
         }
-        // console.log(`hi`);
       })
       .catch((err) => {
         console.log('after quesry err \n', err, '\n\n');

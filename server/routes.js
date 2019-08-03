@@ -1,18 +1,5 @@
 const router = require('express').Router();
 
-// Reference to old contorllers
-// const {
-//   dummyController,
-//   getQuestions,
-//   getAnswers,
-//   postQuestion,
-//   postAnswer,
-//   helpfulQuestion,
-//   reportQuestion,
-//   helpfulAnswer,
-//   reportAnswer
-// } = require('./controllersDELETE.js/index.js');
-
 const {
   dummyController,
   getQuestions,
@@ -26,6 +13,7 @@ const {
 } = require('./controllers/controller.js');
 
 router
+  // TEST ROUTES
   .get('/test', dummyController)
   .get('/test/:product_id', dummyController)
   .post('/test', dummyController)

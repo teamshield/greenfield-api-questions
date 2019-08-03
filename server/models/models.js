@@ -32,16 +32,15 @@ const getQuestions = (product_id, count, data) => {
 };
 
 const getAnswers = (question_id, count, data) => {
-  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2`;
+  // const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2`;
 
   // // FIXME: query when photos are in a column
-  // const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos
-  // FROM answers WHERE question_id = $1 AND report = 0 limit $2`;
+  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0 limit $2`;
+
+  const queryIndex = `SELECT`
 
   return db.any(queryEntry, [question_id, count]);
 };
-
-// const
 
 module.exports = {
   dummyModel,
