@@ -14,17 +14,25 @@ CREATE DATABASE api;
 
 -- 8 headers, 3521634 entries // 30s to seed
 -- id, product_id, body, date_written, asker_name, asker_email, reported, helpful
+DROP TABLE IF EXISTS questions;
 CREATE TABLE questions
 (
-  question_id INT PRIMARY KEY,
-  product_id INT,
-  question_body TEXT,
-  question_date TEXT,
-  asker_name TEXT,
-  asker_email TEXT,
+  question_id INT NOT NULL,
+  product_id INT NOT NULL,
+  question_body TEXT NOT NULL,
+  question_date date,
+  asker_name TEXT NOT NULL,
+  asker_email TEXT NOT NULL,
   reported INT,
-  helpful INT
+  question_helpfulness INT NOT NULL,
+  CONSTRAINT "Questions_pkey" PRIMARY KEY
+(question_id)
+)
+WITH
+(
+    OIDS = FALSE
 );
+
 
 -- Count the number of rows
 SELECT
@@ -32,23 +40,32 @@ SELECT
 FROM
   questions
 
--- COPY questions FROM '/Users/charmainetabilas/Desktop/apiCSVs/questions.csv' DELIMITERS ',' CSV header;
+COPY
+questions FROM '/Users/charmainetabilas/Desktop/greenfieldApp-api-questions/apiCSVs/questions.csv' DELIMITER ',' CSV HEADER;
 
 -- HEADERS, 12392946 rows
 -- id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful, photos []
 -- TODO: reseed the database so it has this correct key, WAS question_helpfulness INT
+DROP TABLE IF EXISTS answers;
 CREATE TABLE answers
-
 (
-  id INT PRIMARY KEY,
-  question_id INT REFERENCES questions(question_id),
+  answer_id INT NOT NULL,
+  question_id INT,
   body TEXT,
-  date DATE,
+  date date,
   answerer_name TEXT,
   answerer_email TEXT,
-  reported INT,
-  helpful INT
+  report INT,
+  helpfulness INT,
+  CONSTRAINT "Answers_pkey" PRIMARY KEY
+(answer_id)
+)
+WITH
+(
+    OIDS = FALSE
 );
+
+-- COPY answers FROM '/Users/charmainetabilas/Desktop/greenfieldApp-api-questions/apiCSVs/answers.csv' DELIMITERS ',' CSV header;
 
 -- Altering answers to add a answer_photos coluumn
 ALTER TABLE table_name answers;
@@ -56,39 +73,6 @@ ALTER TABLE table_name answers;
 ALTER TABLE answers ADD COLUMN photos TEXT [];
 
 
-
-INSERT INTO answers
-
-  (photos)
-VALUES
-  (
-    ARRAY
-[ 'test.rl', 'anothertest.jpg' ]
-   )
-   
-   WHERE id = 1
-   ;
-
-
-SELECT *
-FROM answers ARRAY_AGG(url)
-answer_photos LEFT JOIN id USING answer_id;
-
-
-
-insert into answers
-  (photos)
-select
-  'John', 'Smith',
-  '6 Brewery close, Buxton, Norfolk', 'cmp.testing@example.com'
-where not exists (
-    select *
-from answers
-where id = 1
-);
-
-
--- COPY answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/answers.csv' DELIMITERS ',' CSV header;
 SELECT
   COUNT(*)
 FROM
