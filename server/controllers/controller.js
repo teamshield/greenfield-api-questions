@@ -4,40 +4,17 @@ const models = require('../models/models.js');
 const dummyController = (req, res) => {
   console.time();
   const { product_id, page = 1, count = 5 } = req.params;
-  console.log('product_id', product_id);
-  let data = {
-    product_id: product_id,
-    results: []
-  };
-
-  res.send(data);
-
-  // models
-  //   .dummyModel(product_id, data)
-  //   .then(() => {
-  //     console.timeEnd();
-  //     res.send(data);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     res.sendStatus(500);
-  //   });
-};
-
-// Get Controllers
-const getQuestions = (req, res) => {
-  console.time();
-  const { product_id, page = 1, count = 5 } = req.params;
-  let data = {
+  console.log('product_id: ', product_id, '\n count: ', count);
+  let questionObj = {
     product_id: product_id,
     results: []
   };
 
   models
-    .getQuestions(product_id, count, data)
+    .dummyModel(product_id, count, questionObj)
     .then(() => {
       console.timeEnd();
-      res.send(data);
+      res.send(questionObj);
     })
     .catch((err) => {
       console.log(err);
@@ -45,6 +22,31 @@ const getQuestions = (req, res) => {
     });
 };
 
+// Get Controllers
+
+// Working
+const getQuestions = (req, res) => {
+  console.time();
+  const { product_id, page = 1, count = 5 } = req.params;
+  console.log('product_id: ', product_id, '\n count: ', count);
+  let questionObj = {
+    product_id: product_id,
+    results: []
+  };
+
+  models
+    .dummyModel(product_id, count, questionObj)
+    .then(() => {
+      console.timeEnd();
+      res.send(questionObj);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+};
+
+// Working
 const getAnswers = (req, res) => {
   console.time();
   const { question_id, page = 1, count = 5 } = req.params;
