@@ -2,24 +2,26 @@ const models = require('../models/models.js');
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
-  // res.send('hit');
   console.time();
   const { product_id, page = 1, count = 5 } = req.params;
+  console.log('product_id', product_id);
   let data = {
     product_id: product_id,
     results: []
   };
 
-  models
-    .dummyModel(data)
-    .then(() => {
-      console.timeEnd();
-      res.send(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  res.send(data);
+
+  // models
+  //   .dummyModel(product_id, data)
+  //   .then(() => {
+  //     console.timeEnd();
+  //     res.send(data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.sendStatus(500);
+  //   });
 };
 
 // Get Controllers

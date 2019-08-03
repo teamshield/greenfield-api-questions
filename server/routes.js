@@ -27,12 +27,12 @@ const {
 
 router
   .get('/test', dummyController)
-  .get('/test/:question_id', dummyController)
+  .get('/test/:product_id', dummyController)
   .post('/test', dummyController)
 
   // questions - based on productId
   // .get('/qa/:product_id', getQuestions)
-  .get('/qa', getQuestions)
+  .get('/qa/:product_id', getQuestions)
   // answers - based on questionId
   .get('/qa/:question_id/answers', getAnswers)
 

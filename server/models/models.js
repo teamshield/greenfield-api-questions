@@ -1,11 +1,10 @@
 const db = require('../database.js');
 
 // test query
-const dummyModel = (data) => {
-  const queryEntry =
-    'SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = 1 AND reported = 0 LIMIT 2';
+const dummyModel = (product_id, data) => {
+  const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT 2`;
 
-  return db.any(queryEntry).then((result) => {
+  return db.any(queryEntry, [product_id]).then((result) => {
     data.results = result;
   });
 };
