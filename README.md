@@ -10,9 +10,8 @@ A two person dev team created ...
 <img src="documentation/logos.png">
 </p>
 
-> - 🎣 React Hooks - Alongside Redux, each team member implemented hooks in their component
-> - 🎭 Unit, Integration and End to End tests
-> - 📦 Webpack Build
+> - 🐘 Postgres
+> - 🐋 Docker
 
 ## Table of Contents
 
