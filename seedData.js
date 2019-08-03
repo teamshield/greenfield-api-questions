@@ -18,33 +18,57 @@ let render = fs.createReadStream(
   options
 );
 
-render.pipe(csv.parse({ headers: true })).on('data', (row) => {
-  console.log('row', row);
-  let photo = `UPDATE answers SET photos = photos || $2::jsonb WHERE answer_id = $1;`;
-});
+render
+  .pipe(csv.parse({ headers: true }))
+  .on('data', (row) => {
+    console.log('row', row);
 
-// render.pipe(csv.parse({ headers: true })).on('data', (row) => {
-//   let photo = JSON.stringify({ id: row.id, url: row[' url'] });
-//   let queryEntry = `UPDATE answers SET photos = photos || $2::jsonb WHERE answer_id = $1;`;
-//   let arrEntry = [row[' answer_id'], photo];
+    let photo = JSON.stringify({ id: row.id, url: row[' url'] });
 
-//   db.query(queryEntry, arrEntry, (err, result) => {
-//     if (err) {
-//       console.log(`on data err: \n`, err);
-//     }
-//     count++;
-//     if (count % 1000 === 0) {
-//       console.log(count);
-//     }
+    let queryEntry = `UPDATE answers SET photos = photos || $2::jsonb WHERE answer_id = $1;`;
+
+    let arrEntry = [row[' answer_id'], photo];
+    db.query(queryEntry, arrEntry, (err, result) => {
+      if (err) {
+        console.log(`on data err: \n`, err);
+      }
+      count++;
+      if ((count % 100, 000 === 0)) {
+        console.log(count);
+      }
+    });
+  })
+  .on('end', () => {
+    console.log('Completed adding photos');
+  })
+  .on('err', (err) => {
+    console.log(err);
+  });
+
+// render
+//   .pipe(csv.parse({ headers: true }))
+//   .on('data', (row) => {
+//     let photo = JSON.stringify({ id: row.id, url: row[' url'] });
+//     let queryEntry = `UPDATE answers SET photos = photos || $2::jsonb WHERE answer_id = $1;`;
+//     let arrEntry = [row[' answer_id'], photo];
+
+//     db.query(queryEntry, arrEntry, (err, result) => {
+//       if (err) {
+//         console.log(`on data err: \n`, err);
+//       }
+//       count++;
+//       if (count % 1000 === 0) {
+//         console.log(count);
+//       }
+//     });
+//   })
+//   // close event
+//   .on('end', () => {
+//     console.log('Completed adding photos');
+//   })
+//   .on('err', (err) => {
+//     console.log(err);
 //   });
-// });
-// close event
-// .on('end', () => {
-//   console.log('Completed adding photos');
-// })
-// .on('err', (err) => {
-//   console.log(err);
-// });
 
 // TEST FILE READ
 // reader = fs.createReadStream(path.join(__dirname, './README.md'), {
