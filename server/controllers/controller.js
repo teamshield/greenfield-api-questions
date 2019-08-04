@@ -82,7 +82,8 @@ const postAnswer = (req, res) => {
   //
 };
 
-// Put Questions
+// Put Methods
+// Questions
 const helpfulQuestion = (req, res) => {
   console.time();
   console.timeEnd();
@@ -93,7 +94,7 @@ const reportQuestion = (req, res) => {
   console.timeEnd();
 };
 
-// Put Answers
+// Answers
 const helpfulAnswer = (req, res) => {
   console.time();
   console.timeEnd();
