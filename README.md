@@ -66,3 +66,9 @@ Ensure that the following modules are installed before running `npm install`
 > **IMPORTANT: development vs. production**
 >
 > - Some notes go here
+
+| Request Type | /qa/:productId | /qa/:questionId/answers | /qa/:questionId/answers \*w/photos |     |
+| ------------ | -------------- | ----------------------- | ---------------------------------- | --- |
+| GET          | 2743.463ms     | 8582.042ms              | 14571.786ms                        |     |
+| POST         |                |                         |                                    |     |
+|              |                |                         |                                    |     |

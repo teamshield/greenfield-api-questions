@@ -62,7 +62,7 @@ CREATE TABLE answers
 )
 WITH
 (
-    OIDS = FALSE
+  OIDS = FALSE
 );
 
 -- COPY answers FROM '/Users/charmainetabilas/Desktop/greenfieldApp-api-questions/apiCSVs/answers.csv' DELIMITERS ',' CSV header;
@@ -78,18 +78,21 @@ FROM
   answers
 
 -- id, answer_id, url
-CREATE TABLE answer_photos
-(
-  id INT PRIMARY KEY,
-  answer_id INT REFERENCES answers(id),
-  url TEXT
-);
 
---  COPY answer_photos FROM '/Users/charmainetabilas/Desktop/apiCSVs/answers_photos.csv' DELIMITERS ',' CSV header;
-SELECT
-  COUNT(*)
-FROM
-  answer_photos
 
 -- 3717892 photos
 -- 3717892
+
+-- id, answer_id, url
+DROP TABLE IF EXISTS photos;
+CREATE TABLE photos
+(
+  id INT NOT NULL,
+  answer_id INT NOT NULL,
+  url TEXT,
+  CONSTRAINT "Photos_pkey" PRIMARY KEY(id)
+)
+WITH
+(
+   OIDS = FALSE
+);

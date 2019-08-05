@@ -1,6 +1,6 @@
 const db = require('../database.js');
 
-// test query
+// TEST MODEL
 const dummyModel = (product_id, count, data) => {
   const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2`;
 
@@ -9,7 +9,7 @@ const dummyModel = (product_id, count, data) => {
   });
 };
 
-// GET Models
+// GET REQUESTS
 const getQuestions = (product_id, count, data) => {
   const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2`;
 
@@ -32,19 +32,68 @@ const getQuestions = (product_id, count, data) => {
 };
 
 const getAnswers = (question_id, count, data) => {
-  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2`;
+  // const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2`;
 
   // // FIXME: query when photos are in a column
-  // const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos
-  // FROM answers WHERE question_id = $1 AND report = 0 limit $2`;
+  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0 limit $2`;
+
+  // const queryIndexed = `SELECT`;
 
   return db.any(queryEntry, [question_id, count]);
 };
 
-// const
+// POST REQUESTS
+const postQuestion = (product_id, reqBody) => {
+  const queryEntry = `INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4) RETURNING id`;
+
+  const { body, name, email } = reqBody;
+
+  return db.any(queryEntry, [product_id, body, name, email]);
+};
+
+const postAnswer = (question_id, reqBody) => {
+  const queryEntry = `INSERT INTO answers (body, answerer_name, answerer_email) VALUES ($, $, $, $, $) RETURNING id `;
+
+  const { body, name, email } = reqBody;
+
+  return db.any(queryEntry, [question_id, body, name, email]);
+};
+
+// PUT REQUESTS
+// Questions
+const helpfulQuestion = (question_id) => {
+  const queryEntry = `UPDATE questions SET question_helpfulness = question_helpfulness + 1 WHERE question_id = $1`;
+
+  return db.any(queryEntry, [question_id]);
+};
+
+const reportQuestion = (question_id) => {
+  const queryEntry = `UPDATE questions SET reported = reported + 1 WHERE question_id = $1`;
+
+  return db.any(queryEntry, [question_id]);
+};
+
+// Answers
+const helpfulAnswer = (answer_id) => {
+  const queryEntry = `UPDATE answers SET helpfulness = helpfulness + 1 WHERE answer_id = $1`;
+
+  return db.any(queryEntry, [answer_id]);
+};
+
+const reportAnswer = (answer_id) => {
+  const queryEntry = `UPDATE answers SET report = report + 1 WHERE answer_id = $1`;
+
+  return db.any(queryEntry, [answer_id]);
+};
 
 module.exports = {
   dummyModel,
   getQuestions,
-  getAnswers
+  getAnswers,
+  postQuestion,
+  postAnswer,
+  helpfulQuestion,
+  reportQuestion,
+  helpfulAnswer,
+  reportAnswer
 };
