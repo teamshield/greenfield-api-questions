@@ -16,7 +16,7 @@ const getQuestions = (product_id, count, data) => {
   return db.any(queryEntry, [product_id, count]).then((result) => {
     data.results = result;
 
-    const answerQuery = `SELECT answer_id AS id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0`;
+    const answerQuery = `SELECT answer_id AS id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0`;
 
     return Promise.all(
       data.results.map((question) => {
@@ -35,7 +35,7 @@ const getAnswers = (question_id, count, data) => {
   // const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2`;
 
   // // FIXME: query when photos are in a column
-  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0 limit $2`;
+  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0 limit $2`;
 
   // const queryIndexed = `SELECT`;
 

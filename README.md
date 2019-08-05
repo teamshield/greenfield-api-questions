@@ -98,18 +98,21 @@ Ensure that the following modules are installed before running `npm install`
 | POST         |                |                         |                                    |     |
 |              |                |                         |                                    |     |
 
-| Query                                              | Before Indexing | After Indexing | Efficiency |
+| Queries on the Postgres Database                   | Before Indexing | After Indexing | Efficiency |
 | -------------------------------------------------- | --------------- | -------------- | ---------- |
 | `SELECT ... FROM questions WHERE product_id = ...` | 2144.990 ms     | 0.736 ms       | 2914x      |
 | `SELECT ... FROM answers WHERE question_id = ...`  | 5967.155 ms     | 2.460 ms       | 2425x      |
 | `SELECT ...` with new_answers table                | 1065.861 ms     | 2.405 ms       | 443x       |
 |                                                    |                 |                |            |
 |                                                    |                 |                |            |
-|                                                    |                 |                |            |
-|                                                    |                 |                |            |
-|                                                    |                 |                |            |
-|                                                    |                 |                |
-|                                                    |                 |                |
-|                                                    |                 |                |
-|                                                    |                 |                |
-|                                                    |                 |                |
+
+| Request | Endpoint                                        | Before Indexing | After Indexing <sup>\* w/photos</sup> | Efficiency |
+| ------- | ----------------------------------------------- | --------------- | ------------------------------------- | ---------- |
+| GET     | /qa/:productId                                  | 2743.463ms      | 69.131ms                              |            |
+| GET     | /qa/:questionId/answers                         | 8582.042ms      | 130.562ms                             |            |
+| GET     | /qa/:questionId/answers <sup> \*w/photos </sup> | 14571.786ms     | NA                                    |            |
+|         |                                                 |                 |                                       |
+|         |                                                 |                 |                                       |
+|         |                                                 |                 |                                       |
+|         |                                                 |                 |                                       |
+|         |                                                 |                 |
