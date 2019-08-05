@@ -18,7 +18,7 @@ router
   .get('/test/:product_id', dummyController)
   .post('/test', dummyController)
 
-  // GET ROUTES
+  // GET ROUTES - Working routes
   .get('/qa/:product_id', getQuestions)
   // answers - based on questionId
   .get('/qa/:question_id/answers', getAnswers)
@@ -29,11 +29,11 @@ router
   .post('/qa/:question_id/answers', postAnswer)
 
   // PUT ROUTES
-  // Questions
+  // Questions - Bth routes working
   .put('/qa/question/:question_id/helpful', helpfulQuestion)
   .put('/qa/question/:question_id/report', reportQuestion)
 
-  // Answers
+  // Answers - Both routes working
   .put('/qa/answer/:answer_id/helpful', helpfulAnswer)
   .put('/qa/answer/:answer_id/report', reportAnswer);
 

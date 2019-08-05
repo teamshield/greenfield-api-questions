@@ -30,7 +30,6 @@ const getQuestions = (req, res) => {
 
   const { product_id, page = 1, count = 5 } = req.params;
 
-  // console.log('product_id: ', product_id, '\n count: ', count);
   let questionObj = {
     product_id: product_id,
     results: []
@@ -84,7 +83,6 @@ const postQuestion = (req, res) => {
   models
     .postQuestion(product_id, body)
     .then(() => {
-      console.log(`successful questions post`);
       console.timeEnd();
       res.sendStatus(201);
     })
@@ -102,7 +100,6 @@ const postAnswer = (req, res) => {
   models
     .postAnswer((question_id, body))
     .then(() => {
-      console.log(`sucessful post answer`);
       console.timeEnd();
       res.sendStatus(201);
     })
@@ -121,7 +118,6 @@ const helpfulQuestion = (req, res) => {
   models
     .helpfulQuestion(question_id)
     .then(() => {
-      console.log(`sucessful questions helpful put`);
       console.timeEnd();
       res.sendStatus(204);
     })
@@ -137,7 +133,6 @@ const reportQuestion = (req, res) => {
   models
     .reportQuestion(question_id)
     .then(() => {
-      console.log(`sucessful questions reported put`);
       console.timeEnd();
       res.sendStatus(204);
     })
@@ -154,7 +149,6 @@ const helpfulAnswer = (req, res) => {
   models
     .helpfulAnswer(answer_id)
     .then(() => {
-      console.log(`sucessful answers helpful put`);
       console.timeEnd();
       res.sendStatus(204);
     })
@@ -168,9 +162,8 @@ const reportAnswer = (req, res) => {
 
   const { answer_id } = req.params;
   models
-    .reportQuestion(answer_id)
+    .reportAnswer(answer_id)
     .then(() => {
-      console.log(`sucessful answers reported put`);
       console.timeEnd();
       res.sendStatus(204);
     })
