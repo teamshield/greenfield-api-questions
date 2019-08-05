@@ -85,11 +85,12 @@ Ensure that the following modules are installed before running `npm install`
 > Query ran to get the table sizes
 > SELECT pg_size_pretty( pg_total_relation_size('tablename'));
 
-| Table Name | Size (before Indexing) | Size (after Indexing) |
-| ---------- | ---------------------- | --------------------- |
-| questions  | 534 MB                 | 610 MB                |
-| answers    | 1886 MB                | 2151 MB               |
-| photos     | 16 kB                  |                       |
+| Table Name  | Size (before Indexing) | Size (after Indexing) |
+| ----------- | ---------------------- | --------------------- |
+| questions   | 534 MB                 | 610 MB                |
+| answers     | 1886 MB                | 2151 MB               |
+| photos      | 16 kB                  |                       |
+| new_answers | 2120 MB                | 2385 MB               |
 
 | Request Type | /qa/:productId | /qa/:questionId/answers | /qa/:questionId/answers \*w/photos |     |
 | ------------ | -------------- | ----------------------- | ---------------------------------- | --- |
@@ -97,16 +98,16 @@ Ensure that the following modules are installed before running `npm install`
 | POST         |                |                         |                                    |     |
 |              |                |                         |                                    |     |
 
-| Query                                              | Before Indexing | After Indexing |
-| -------------------------------------------------- | --------------- | -------------- |
-| `SELECT ... FROM questions WHERE product_id = ...` | 2144.990 ms     | 0.736 ms       |
-| `SELECT ... FROM answers WHERE question_id = ...`  | 5967.155 ms     | 2.460 ms       |
-|                                                    |                 |                |
-|                                                    |                 |                |
-|                                                    |                 |                |
-|                                                    |                 |                |
-|                                                    |                 |                |
-|                                                    |                 |                |
+| Query                                              | Before Indexing | After Indexing | Efficiency |
+| -------------------------------------------------- | --------------- | -------------- | ---------- |
+| `SELECT ... FROM questions WHERE product_id = ...` | 2144.990 ms     | 0.736 ms       | 2914x      |
+| `SELECT ... FROM answers WHERE question_id = ...`  | 5967.155 ms     | 2.460 ms       | 2425x      |
+| `SELECT ...` with new_answers table                | 1065.861 ms     | 2.405 ms       | 443x       |
+|                                                    |                 |                |            |
+|                                                    |                 |                |            |
+|                                                    |                 |                |            |
+|                                                    |                 |                |            |
+|                                                    |                 |                |            |
 |                                                    |                 |                |
 |                                                    |                 |                |
 |                                                    |                 |                |
