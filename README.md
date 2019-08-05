@@ -57,15 +57,9 @@ Ensure that the following modules are installed before running `npm install`
 
 - Node v10.13.0 or higher
 
-## API
+## Routes
 
-> Comments here
-
-## Notes
-
-> **IMPORTANT: development vs. production**
->
-> - Some notes go here
+> Some notes here
 
 | Request Type | Endpoint                                            | Returns                                                        | Status |
 | ------------ | --------------------------------------------------- | -------------------------------------------------------------- | ------ |
@@ -77,3 +71,13 @@ Ensure that the following modules are installed before running `npm install`
 | PUT          | /qa/question/:question_id/report                    |                                                                | 204    |
 | PUT          | /qa/answer/:answer_id/helpful                       |                                                                | 204    |
 | PUT          | /qa/:questionId/answers/qa/answer/:answer_id/report |                                                                | 204    |
+
+## API
+
+> Comments here
+
+## Notes
+
+> **IMPORTANT: development vs. production**
+>
+> - Some notes go here
