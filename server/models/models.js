@@ -22,9 +22,10 @@ const getQuestions = (product_id, count, data) => {
       data.results.map((question) => {
         question.answers = {};
         return db.any(answerQuery, [question.question_id]).then((answers) => {
-          for (let answer of answers) {
+          console.log('answers from get questions', answers);
+          answers.forEach((answer) => {
             question.answers[answer.id] = answer;
-          }
+          });
         });
       })
     );

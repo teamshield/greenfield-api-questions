@@ -80,4 +80,10 @@ Ensure that the following modules are installed before running `npm install`
 
 > **IMPORTANT: development vs. production**
 >
-> - Some notes go here
+> - Table Sizes  <sup> *5700/12M of photos added to answers table </sup>
+
+| Table Name | Size    |
+| ---------- | ------- |
+| questions  | 534 MB  |
+| answers    | 1886 MB |  
+| photos     | 16 kB   |
