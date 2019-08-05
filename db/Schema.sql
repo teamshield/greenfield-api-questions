@@ -58,10 +58,10 @@ CREATE TABLE answers
   report INT,
   helpfulness INT,
   CONSTRAINT "Answers_pkey" PRIMARY KEY
-(answer_id)
+  (answer_id)
 )
 WITH
-(
+  (
   OIDS = FALSE
 );
 
@@ -80,25 +80,58 @@ FROM
 -- id, answer_id, url
 
 
--- 3717892 photos
--- 3717892
-
--- id, answer_id, url
-DROP TABLE IF EXISTS photos;
-CREATE TABLE photos
+DROP TABLE IF EXISTS new_answers;
+CREATE TABLE new_answers
 (
-  id INT NOT NULL,
   answer_id INT NOT NULL,
-  url TEXT,
-  CONSTRAINT "Photos_pkey" PRIMARY KEY(id)
+  question_id INT,
+  body TEXT,
+  date date,
+  answerer_name TEXT,
+  answerer_email TEXT,
+  report INT,
+  helpfulness INT,
+  photos TEXT
+  [],
+  CONSTRAINT "New_Answers_pkey" PRIMARY KEY
+  (answer_id)
 )
-WITH
+  WITH
+  (
+  OIDS = FALSE
+);
+
+  -- COPY new_answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/new_answers.csv' DELIMITERS ',' CSV header;
+
+
+  -- 3717892 photos
+  -- 3717892
+
+  -- id, answer_id, url
+  DROP TABLE IF EXISTS photos;
+  CREATE TABLE photos
+  (
+    id INT NOT NULL,
+    answer_id INT NOT NULL,
+    url TEXT,
+    CONSTRAINT "Photos_pkey" PRIMARY KEY(id)
+  )
+  WITH
 (
    OIDS = FALSE
 );
 
 -- EXPLAIN analyze SELECT * FROM questions where product_id = 1;
 
+-- SIZING TABLES 
+-- SELECT pg_size_pretty( pg_total_relation_size('tablename'));
+-- SELECT pg_size_pretty( pg_total_relation_size('new_answers'));
+
 -- INDEXING
---  CREATE INDEX ON questions (product_id);
--- CREATE INDEX ON answers (question_id)
+--  CREATE INDEX ON questions (product_id) ;
+-- CREATE INDEX ON answers (question_id);
+-- CREATE INDEX ON new_answers (question_id);
+
+-- EXPAIN
+--  EXPLAIN analyze SELECT * FROM new_answers where question_id = 1;
+
