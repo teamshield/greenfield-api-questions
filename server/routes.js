@@ -18,25 +18,23 @@ router
   .get('/test/:product_id', dummyController)
   .post('/test', dummyController)
 
-  // questions - based on productId
-  // .get('/qa/:product_id', getQuestions)
+  // GET ROUTES
   .get('/qa/:product_id', getQuestions)
   // answers - based on questionId
   .get('/qa/:question_id/answers', getAnswers)
 
-  // post a question
+  // POST ROUTES
   .post('/qa/:product_id', postQuestion)
   // post an answer
   .post('/qa/:question_id/answers', postAnswer)
 
-  // question - helpful
+  // PUT ROUTES
+  // Questions
   .put('/qa/question/:question_id/helpful', helpfulQuestion)
-  // question - report
   .put('/qa/question/:question_id/report', reportQuestion)
 
-  // answer - helpful
+  // Answers
   .put('/qa/answer/:answer_id/helpful', helpfulAnswer)
-  // answer - report
   .put('/qa/answer/:answer_id/report', reportAnswer);
 
 module.exports = router;

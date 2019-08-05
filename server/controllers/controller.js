@@ -38,7 +38,7 @@ const getQuestions = (req, res) => {
     .dummyModel(product_id, count, questionObj)
     .then(() => {
       console.timeEnd();
-      res.send(questionObj);
+      res.sendStatus(200).send(questionObj);
     })
     .catch((err) => {
       console.log(err);
@@ -75,34 +75,105 @@ const postQuestion = (req, res) => {
   console.time();
   console.log('req.params.product_id', req.params.product_id);
   console.log('req.body', req.body);
-  res.sendStatus(201);
+
+  const { product_id, body } = req.params;
+
+  models
+    .postQuestion(product_id, body)
+    .then(() => {
+      console.log(`successful questions post`);
+      console.timeEnd();
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('err in post Answer \n', err);
+      res.sendStatus(500);
+    });
 };
 
 const postAnswer = (req, res) => {
-  //
+  console.time();
+
+  const { question_id, body } = req.params;
+
+  models
+    .postAnswer((question_id, body))
+    .then(() => {
+      console.log(`sucessful post answer`);
+      console.timeEnd();
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('err in posting answers', err);
+      res.sendStatus(500);
+    });
 };
 
 // Put Methods
 // Questions
 const helpfulQuestion = (req, res) => {
   console.time();
-  console.timeEnd();
+
+  const { question_id } = req.params;
+  models
+    .helpfulQuestion(question_id)
+    .then(() => {
+      console.log(`sucessful questions helpful put`);
+      console.timeEnd();
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('err in helpfulQuestion', err).sendStatus(500);
+    });
 };
 
 const reportQuestion = (req, res) => {
   console.time();
-  console.timeEnd();
+
+  const { question_id } = req.params;
+  models
+    .reportQuestion(question_id)
+    .then(() => {
+      console.log(`sucessful questions reported put`);
+      console.timeEnd();
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('err in report answers \n', err).sendStatus(500);
+    });
 };
 
 // Answers
 const helpfulAnswer = (req, res) => {
   console.time();
-  console.timeEnd();
+
+  const { answer_id } = req.params;
+  models
+    .helpfulAnswer(answer_id)
+    .then(() => {
+      console.log(`sucessful answers helpful put`);
+      console.timeEnd();
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('err in helpfulAnswer', err).sendStatus(500);
+    });
 };
 
 const reportAnswer = (req, res) => {
   console.time();
-  console.timeEnd();
+
+  const { answer_id } = req.params;
+  models
+    .reportQuestion(answer_id)
+    .then(() => {
+      console.log(`sucessful answers reported put`);
+      console.timeEnd();
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('err in report answers \n', err).sendStatus(500);
+    });
 };
 
 module.exports = {
