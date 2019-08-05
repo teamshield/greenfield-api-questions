@@ -80,10 +80,35 @@ Ensure that the following modules are installed before running `npm install`
 
 > **IMPORTANT: development vs. production**
 >
-> - Table Sizes  <sup> *5700/12M of photos added to answers table </sup>
+> - Table Sizes <sup> \*5700/12M of photos added to answers table </sup>
 
-| Table Name | Size    |
-| ---------- | ------- |
-| questions  | 534 MB  |
-| answers    | 1886 MB |  
-| photos     | 16 kB   |
+> Query ran to get the table sizes
+> SELECT pg_size_pretty( pg_total_relation_size('tablename'));
+
+| Table Name | Size (before Indexing) | Size (after Indexing) |
+| ---------- | ---------------------- | --------------------- |
+| questions  | 534 MB                 | 610 MB                |
+| answers    | 1886 MB                | 2151 MB               |
+| photos     | 16 kB                  |                       |
+
+| Request Type | /qa/:productId | /qa/:questionId/answers | /qa/:questionId/answers \*w/photos |     |
+| ------------ | -------------- | ----------------------- | ---------------------------------- | --- |
+| GET          | 2743.463ms     | 8582.042ms              | 14571.786ms                        |     |
+| POST         |                |                         |                                    |     |
+|              |                |                         |                                    |     |
+
+| Query                                              | Before Indexing | After Indexing |
+| -------------------------------------------------- | --------------- | -------------- |
+| `SELECT ... FROM questions WHERE product_id = ...` | 2144.990 ms     | 0.736 ms       |
+| `SELECT ... FROM answers WHERE question_id = ...`  | 5967.155 ms     | 2.460 ms       |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
+|                                                    |                 |                |
