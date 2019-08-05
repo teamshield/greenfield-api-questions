@@ -40,7 +40,7 @@ const getQuestions = (req, res) => {
     .then(() => {
       console.timeEnd();
       // console.log(questionObj);
-      res.send(questionObj);
+      res.status(200).send(questionObj);
     })
     .catch((err) => {
       console.log('err in Get Request', err);
@@ -64,7 +64,7 @@ const getAnswers = (req, res) => {
       };
 
       console.timeEnd();
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch((err) => {
       console.log(err);

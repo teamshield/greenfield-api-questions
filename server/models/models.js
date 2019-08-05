@@ -48,15 +48,15 @@ const postQuestion = (product_id, reqBody) => {
 
   const { body, name, email } = reqBody;
 
-  return db.any(queryEntry, [product_id, body, name, email]);
+  return db.any(queryEntry, [product_id, body, name, email, photos]);
 };
 
 const postAnswer = (question_id, reqBody) => {
-  const queryEntry = `INSERT INTO answers (body, answerer_name, answerer_email) VALUES ($, $, $, $, $) RETURNING id `;
+  const queryEntry = `INSERT INTO answers (body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $, $) RETURNING id `;
 
-  const { body, name, email } = reqBody;
+  const { body, name, email, photos } = reqBody;
 
-  return db.any(queryEntry, [question_id, body, name, email]);
+  return db.any(queryEntry, [question_id, body, name, email, photos]);
 };
 
 // PUT REQUESTS
