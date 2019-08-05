@@ -67,8 +67,13 @@ Ensure that the following modules are installed before running `npm install`
 >
 > - Some notes go here
 
-| Request Type | /qa/:productId | /qa/:questionId/answers | /qa/:questionId/answers \*w/photos |     |
-| ------------ | -------------- | ----------------------- | ---------------------------------- | --- |
-| GET          | 2743.463ms     | 8582.042ms              | 14571.786ms                        |     |
-| POST         |                |                         |                                    |     |
-|              |                |                         |                                    |     |
+| Request Type | Endpoint                                            | Returns                                                        | Status |
+| ------------ | --------------------------------------------------- | -------------------------------------------------------------- | ------ |
+| GET          | /qa/:productId                                      | An object containing questions related to a particular product | 200    |
+| GET          | /qa/:questionId/answers                             | An object cotaining answers related a question                 | 200    |
+| POST         | /qa/:productId                                      |                                                                | 201    |
+| POST         | /qa/:questionId/answers                             |                                                                | 201    |
+| PUT          | /qa/question/:question_id/helpful                   |                                                                | 204    |
+| PUT          | /qa/question/:question_id/report                    |                                                                | 204    |
+| PUT          | /qa/answer/:answer_id/helpful                       |                                                                | 204    |
+| PUT          | /qa/:questionId/answers/qa/answer/:answer_id/report |                                                                | 204    |

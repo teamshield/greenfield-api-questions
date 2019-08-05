@@ -22,7 +22,7 @@ const dummyController = (req, res) => {
     });
 };
 
-// Get Controllers
+// GET Controllers
 
 // Working
 const getQuestions = (req, res) => {
@@ -70,7 +70,7 @@ const getAnswers = (req, res) => {
     });
 };
 
-// Post Methods
+// POST Methods
 const postQuestion = (req, res) => {
   console.time();
   console.log('req.params.product_id', req.params.product_id);
@@ -109,7 +109,7 @@ const postAnswer = (req, res) => {
     });
 };
 
-// Put Methods
+// PUT Methods
 // Questions
 const helpfulQuestion = (req, res) => {
   console.time();
