@@ -96,3 +96,9 @@ WITH
 (
    OIDS = FALSE
 );
+
+-- EXPLAIN analyze SELECT * FROM questions where product_id = 1;
+
+-- INDEXING
+--  CREATE INDEX ON questions (product_id);
+-- CREATE INDEX ON answers (question_id)
