@@ -14,7 +14,7 @@ const getQuestions = (product_id, count = 5, page = 0, data) => {
   const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2
   OFFSET $3`;
 
-  const offset = (page + 1) * count;
+  const offset = (parseInt(page, 10) + 1) * parseInt(count, 10);
 
   console.log('\n\n page: ', page);
   console.log('count', count);

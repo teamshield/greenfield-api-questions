@@ -28,7 +28,9 @@ const dummyController = (req, res) => {
 const getQuestions = (req, res) => {
   console.time();
 
-  const { product_id, page, count } = req.params;
+  const { product_id, count, page } = req.params;
+
+  console.log('req.params inside getQuestions', req.params);
 
   let questionObj = {
     product_id: product_id,

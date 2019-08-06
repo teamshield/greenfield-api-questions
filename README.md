@@ -108,14 +108,19 @@ Ensure that the following modules are installed before running `npm install`
 
 | Request | Endpoint                                        | Before Indexing | After Indexing <sup>\* w/photos</sup> | Efficiency |
 | ------- | ----------------------------------------------- | --------------- | ------------------------------------- | ---------- |
-| GET     | /qa/:productId                                  | 2743.463ms      | 69.131ms                              |            |
-| GET     | /qa/:questionId/answers                         | 8582.042ms      | 130.562ms                             |            |
-| GET     | /qa/:questionId/answers <sup> \*w/photos </sup> | 14571.786ms     | NA                                    |            |
+| GET     | /qa/:productId                                  | 2743.463 ms     | 69.131 ms                             |            |
+| GET     | /qa/:questionId/answers                         | 8582.042 ms     | 130.562 ms                            |            |
+| GET     | /qa/:questionId/answers <sup> \*w/photos </sup> | 14571.786 ms    | NA                                    |            |
 |         |                                                 |                 |                                       |
-|         |                                                 |                 |                                       |
-|         |                                                 |                 |                                       |
-|         |                                                 |                 |                                       |
-|         |                                                 |                 |
+
+> Indexed tables from above with "WHERE reported = 0" added as a partial index
+
+| Request | Endpoint                | Indexed    | + Partial | Efficiency |
+| ------- | ----------------------- | ---------- | --------- | ---------- |
+| GET     | /qa/:productId          | 69.131 ms  | 64.397 ms |            |
+| GET     | /qa/:questionId/answers | 130.562 ms |           |            |
+|         |                         |            |           |            |
+|         |                         |            |
 
 - get questions before answers indexed: 6372.986ms
 - get new_answers after indexed on questions and new_Answers 67.831ms

@@ -20,8 +20,8 @@ router
 
   // GET ROUTES - Working routes
   // answers - reordered because of confusion with the questions routes
-  .get('/qa/:question_id/answers/:page?/:count?', getAnswers)
-  .get('/qa/:product_id/:page?/:count?', getQuestions)
+  .get('/qa/:question_id/answers/:count?/:page?', getAnswers)
+  .get('/qa/:product_id/:count?/:page?', getQuestions)
 
   // POST ROUTES
   .post('/qa/:product_id', postQuestion)
