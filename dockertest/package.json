@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "express": "*",
-    "nodemon":"*"
+    "nodemon": "*"
   },
   "scripts": {
-    "start": "node ../index.js"
+    "start": "nodemon ../index.js"
   }
 }

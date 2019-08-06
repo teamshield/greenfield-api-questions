@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send(`we out here`);
+  res.send(`a new message`);
 });
 
 const PORT = process.env.PORT || 8080;

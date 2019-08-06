@@ -37,7 +37,7 @@
 
 # Should work -alpine is just a tag
 FROM node:10.13-alpine
-# WORKDIR /app
+# WORKDIR /app ** this is in case we want to create a seperate directory in the shell
 COPY ./package.json ./
 RUN npm install
 COPY . .

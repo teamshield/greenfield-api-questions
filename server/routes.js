@@ -14,7 +14,7 @@ const {
 
 router
   // TEST ROUTES
-  .get('/test', dummyController)
+  .get('/', dummyController)
   .get('/test/:product_id', dummyController)
   .post('/test', dummyController)
 
