@@ -28,7 +28,9 @@ const dummyController = (req, res) => {
 const getQuestions = (req, res) => {
   console.time();
 
-  const { product_id, page = 1, count = 5 } = req.params;
+  const { product_id, count, page } = req.params;
+
+  console.log('req.params inside getQuestions', req.params);
 
   let questionObj = {
     product_id: product_id,
@@ -36,10 +38,9 @@ const getQuestions = (req, res) => {
   };
 
   models
-    .getQuestions(product_id, count, questionObj)
+    .getQuestions(product_id, count, page, questionObj)
     .then(() => {
       console.timeEnd();
-      // console.log(questionObj);
       res.status(200).send(questionObj);
     })
     .catch((err) => {
@@ -51,10 +52,18 @@ const getQuestions = (req, res) => {
 // Working
 const getAnswers = (req, res) => {
   console.time();
-  const { question_id, page = 1, count = 5 } = req.params;
+
+  // TODO: req.param or req.query??? Ask how they were querrying on questions and answers
+  const { question_id, page, count } = req.params;
+  // const { question_id, count, page } = req.query;
+
+  console.log('req.params inside getAnswers', req.params);
+  // console.log('req.params inside getAnswers', typeof parseInt(count, 10));
 
   models
-    .getAnswers(question_id, count)
+    // for req.params
+    .getAnswers(question_id, count, page)
+    // .getAnswers(question_id, parseInt(count, 10), page)
     .then((result) => {
       let data = {
         question: question_id,

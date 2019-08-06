@@ -15,10 +15,15 @@ A two person dev team created ...
 
 ## Table of Contents
 
-1. [Installing Dependencies](#Installing-Dependencies)
-2. [Technologies Used](#Technologies-Used)
-3. [Requirements](#Requirements)
-4. [Notes](#Notes)
+- [Green Field App Documentation](#green-field-app-documentation)
+  - [Table of Contents](#table-of-contents)
+  - [Installing-Dependencies](#installing-dependencies)
+  - [Technologies-Used](#technologies-used)
+  - [Requirements](#requirements)
+  - [Routes](#routes)
+  - [API](#api)
+  - [Engineering Journal](#engineering-journal)
+  - [Notes](#notes)
 
 ## Installing-Dependencies
 
@@ -67,7 +72,7 @@ Ensure that the following modules are installed before running `npm install`
 | GET          | /qa/:questionId/answers                             | An object cotaining answers related a question                 | 200    |
 | POST         | /qa/:productId                                      |                                                                | 201    |
 | POST         | /qa/:questionId/answers                             |                                                                | 201    |
-| PUT          | /qa/question/:question_id/helpful                   |                                                                | 204    |
+| PUT          | /qa/question/:**question_id**/helpful                   |                                                                | 204    |
 | PUT          | /qa/question/:question_id/report                    |                                                                | 204    |
 | PUT          | /qa/answer/:answer_id/helpful                       |                                                                | 204    |
 | PUT          | /qa/:questionId/answers/qa/answer/:answer_id/report |                                                                | 204    |
@@ -76,43 +81,10 @@ Ensure that the following modules are installed before running `npm install`
 
 > Comments here
 
+## Engineering Journal
+
+> Detailed notes on the project including recorded times at different intervals can be found viewed via my [engineering journal](https://gist.github.com/cali3192/e8b73d36df18e0c1cd5519d0e940983a#file-2019-08-05-md)
+
 ## Notes
 
 > **IMPORTANT: development vs. production**
->
-> - Table Sizes <sup> \*5700/12M of photos added to answers table </sup>
-
-> Query ran to get the table sizes
-> SELECT pg_size_pretty( pg_total_relation_size('tablename'));
-
-| Table Name  | Size (before Indexing) | Size (after Indexing) |
-| ----------- | ---------------------- | --------------------- |
-| questions   | 534 MB                 | 610 MB                |
-| answers     | 1886 MB                | 2151 MB               |
-| photos      | 16 kB                  |                       |
-| new_answers | 2120 MB                | 2385 MB               |
-
-| Request Type | /qa/:productId | /qa/:questionId/answers | /qa/:questionId/answers \*w/photos |     |
-| ------------ | -------------- | ----------------------- | ---------------------------------- | --- |
-| GET          | 2743.463ms     | 8582.042ms              | 14571.786ms                        |     |
-| POST         |                |                         |                                    |     |
-|              |                |                         |                                    |     |
-
-| Queries on the Postgres Database                   | Before Indexing | After Indexing | Efficiency |
-| -------------------------------------------------- | --------------- | -------------- | ---------- |
-| `SELECT ... FROM questions WHERE product_id = ...` | 2144.990 ms     | 0.736 ms       | 2914x      |
-| `SELECT ... FROM answers WHERE question_id = ...`  | 5967.155 ms     | 2.460 ms       | 2425x      |
-| `SELECT ...` with new_answers table                | 1065.861 ms     | 2.405 ms       | 443x       |
-|                                                    |                 |                |            |
-|                                                    |                 |                |            |
-
-| Request | Endpoint                                        | Before Indexing | After Indexing <sup>\* w/photos</sup> | Efficiency |
-| ------- | ----------------------------------------------- | --------------- | ------------------------------------- | ---------- |
-| GET     | /qa/:productId                                  | 2743.463ms      | 69.131ms                              |            |
-| GET     | /qa/:questionId/answers                         | 8582.042ms      | 130.562ms                             |            |
-| GET     | /qa/:questionId/answers <sup> \*w/photos </sup> | 14571.786ms     | NA                                    |            |
-|         |                                                 |                 |                                       |
-|         |                                                 |                 |                                       |
-|         |                                                 |                 |                                       |
-|         |                                                 |                 |                                       |
-|         |                                                 |                 |
