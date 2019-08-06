@@ -2,7 +2,7 @@ const models = require('../models/models.js');
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
-  res.send(`SDC sux`);
+  res.send(`SDC - test endpoint`);
   // models
   //   .dummyModel(product_id, count, questionObj)
   //   .then(() => {
