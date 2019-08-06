@@ -116,3 +116,6 @@ Ensure that the following modules are installed before running `npm install`
 |         |                                                 |                 |                                       |
 |         |                                                 |                 |                                       |
 |         |                                                 |                 |
+
+- get questions before answers indexed: 6372.986ms
+- get new_answers after indexed on questions and new_Answers 67.831ms
