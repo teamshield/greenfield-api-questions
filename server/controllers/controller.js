@@ -41,7 +41,6 @@ const getQuestions = (req, res) => {
     .getQuestions(product_id, count, page, questionObj)
     .then(() => {
       console.timeEnd();
-      // console.log(questionObj);
       res.status(200).send(questionObj);
     })
     .catch((err) => {

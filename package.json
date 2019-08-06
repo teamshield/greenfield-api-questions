@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "seed": "node seedData.js"
+    "seed": "node seedData.js",
+    "percent": "node percent.js"
   },
   "repository": {
     "type": "git",
