@@ -124,7 +124,7 @@ CREATE TABLE new_answers
 -- EXPLAIN analyze SELECT * FROM questions where product_id = 1;
 
 -- SIZING TABLES 
--- SELECT pg_size_pretty( pg_total_relation_size('tablename'));
+-- SELECT pg_size_pretty( pg_total_relation_size('questions'));
 -- SELECT pg_size_pretty( pg_total_relation_size('new_answers'));
 
 -- INDEXING
@@ -135,4 +135,4 @@ CREATE TABLE new_answers
 
 -- EXPAIN
 --  EXPLAIN analyze SELECT * FROM new_answers where question_id = 1;
-
+--  EXPLAIN analyze SELECT * FROM questions where product_id = 1;
