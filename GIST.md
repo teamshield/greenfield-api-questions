@@ -98,3 +98,11 @@
 
 - get questions before answers indexed: 6372.986ms
 - get new_answers after indexed on questions and new_Answers 67.831ms
+
+
+- Notes On Indexing: 
+- Index is sorted list of values grouped by in our case proudct_id or question_id
+  - This precalculates our data
+  - Values indexed can be calculated and they are not just raw data from our fields
+- Memory allocation is needed in order to implement a sort
+- We are using a Hash Table to index because we are most interested in mathching (BTree)

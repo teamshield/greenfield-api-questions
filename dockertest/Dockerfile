@@ -35,7 +35,7 @@
 # RUN npm install
 # CMD ["npm", "start"]
 
-# Should work
+# Should work -alpine is just a tag
 FROM node:10.13-alpine
 # WORKDIR /app
 COPY ./package.json ./
