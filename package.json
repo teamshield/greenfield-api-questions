@@ -7,8 +7,8 @@
     "node": "10.16.0"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "server": "node index.js",
+    "server": "nodemon index.js",
+    "start": "node index.js",
     "seed": "node seedData.js",
     "percent": "node percent.js"
   },

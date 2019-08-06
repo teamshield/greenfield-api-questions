@@ -129,10 +129,13 @@ CREATE TABLE new_answers
 
 -- INDEXING
 --  CREATE INDEX ON questions (product_id) ;
--- CREATE INDEX ON answers (question_id);
 -- CREATE INDEX ON new_answers (question_id);
 --  CREATE INDEX ON questions (product_id) WHERE reported = 0;
+--  CREATE INDEX ON new_answers (question_id) WHERE report = 0;
 
 -- EXPAIN
---  EXPLAIN analyze SELECT * FROM new_answers where question_id = 1;
 --  EXPLAIN analyze SELECT * FROM questions where product_id = 1;
+--  EXPLAIN analyze SELECT * FROM new_answers where question_id = 1;
+
+-- TODO: do not use
+-- CREATE INDEX ON answers (question_id);
