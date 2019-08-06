@@ -28,7 +28,7 @@ const dummyController = (req, res) => {
 const getQuestions = (req, res) => {
   console.time();
 
-  const { product_id, page = 1, count = 5 } = req.params;
+  const { product_id, page, count } = req.params;
 
   let questionObj = {
     product_id: product_id,
@@ -36,7 +36,7 @@ const getQuestions = (req, res) => {
   };
 
   models
-    .getQuestions(product_id, count, questionObj)
+    .getQuestions(product_id, count, page, questionObj)
     .then(() => {
       console.timeEnd();
       // console.log(questionObj);
@@ -51,10 +51,10 @@ const getQuestions = (req, res) => {
 // Working
 const getAnswers = (req, res) => {
   console.time();
-  const { question_id, page = 1, count = 5 } = req.params;
+  const { question_id, page, count } = req.params;
 
   models
-    .getAnswers(question_id, count)
+    .getAnswers(question_id, count, page)
     .then((result) => {
       let data = {
         question: question_id,

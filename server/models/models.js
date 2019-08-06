@@ -10,36 +10,43 @@ const dummyModel = (product_id, count, data) => {
 };
 
 // GET REQUESTS
-const getQuestions = (product_id, count, data) => {
-  const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2`;
+const getQuestions = (product_id, count = 5, page = 0, data) => {
+  const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2
+  OFFSET $3`;
 
-  return db.any(queryEntry, [product_id, count]).then((result) => {
-    data.results = result;
+  const offset = (page + 1) * count;
 
-    const answerQuery = `SELECT answer_id AS id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0`;
+  console.log('\n\n page: ', page);
+  console.log('count', count);
+  console.log('offset', offset);
 
-    return Promise.all(
-      data.results.map((question) => {
-        question.answers = {};
-        return db.any(answerQuery, [question.question_id]).then((answers) => {
-          answers.forEach((answer) => {
-            question.answers[answer.id] = answer;
+  return db
+    .any(queryEntry, [product_id, count, page, offset])
+    .then((result) => {
+      data.results = result;
+
+      const answerQuery = `SELECT answer_id AS id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0`;
+
+      return Promise.all(
+        data.results.map((question) => {
+          question.answers = {};
+          return db.any(answerQuery, [question.question_id]).then((answers) => {
+            answers.forEach((answer) => {
+              question.answers[answer.id] = answer;
+            });
           });
-        });
-      })
-    );
-  });
+        })
+      );
+    });
 };
 
-const getAnswers = (question_id, count, data) => {
-  // const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2`;
+const getAnswers = (question_id, count = 5, page = 0, data) => {
+  // // FIXME: offsetting
+  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0 LIMIT $2 OFFSET $3`;
 
-  // // FIXME: query when photos are in a column
-  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0 limit $2`;
+  const offset = (page + 1) * count;
 
-  // const queryIndexed = `SELECT`;
-
-  return db.any(queryEntry, [question_id, count]);
+  return db.any(queryEntry, [question_id, count, page, offset]);
 };
 
 // POST REQUESTS

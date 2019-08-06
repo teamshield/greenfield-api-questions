@@ -91,7 +91,7 @@ CREATE TABLE new_answers
   answerer_email TEXT,
   report INT,
   helpfulness INT,
-  photos TEXT
+  photos JSON
   [],
   CONSTRAINT "New_Answers_pkey" PRIMARY KEY
   (answer_id)

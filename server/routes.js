@@ -19,9 +19,9 @@ router
   .post('/test', dummyController)
 
   // GET ROUTES - Working routes
-  .get('/qa/:product_id', getQuestions)
-  // answers - based on questionId
-  .get('/qa/:question_id/answers', getAnswers)
+  // answers - reordered because of confusion with the questions routes
+  .get('/qa/:question_id/answers/:page?/:count?', getAnswers)
+  .get('/qa/:product_id/:page?/:count?', getQuestions)
 
   // POST ROUTES
   .post('/qa/:product_id', postQuestion)
