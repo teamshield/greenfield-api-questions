@@ -13,6 +13,7 @@ services:
       - ./db/Schema.sql:/docker-entrypoint-initdb.d/Schema.sql
       - ./data:/docker-entrypoint-initdb.d/csv
   server:
+    image: 'ctabilas/api'
     build:
       dockerfile: Dockerfile
       context: '.'
