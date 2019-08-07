@@ -7,13 +7,23 @@ const sizes = [
   '3134 MB | 3386 MB'
 ];
 
-const tableSize = (arr) => {
+const fromFirst = (arr) => {
   return arr.map((elem) => {
     let compare = elem
       .split(' MB')
       .join('')
       .split(' | ');
-    return ((compare[1] - compare[0]) / compare[0]) * 100;
+    return compare[0];
+  });
+};
+
+const tableSize = (arr) => {
+  return arr.map((elem) => {
+    let compare = elem
+      .split(' ms')
+      .join('')
+      .split(' | ');
+    return compare[0];
   });
 };
 
@@ -21,7 +31,7 @@ const tableSizes = tableSize(sizes);
 console.log('tableSizes', tableSizes, '\n');
 
 const before = [
-  `13.387 ms    | 10.171 ms`,
+  // `13.387 ms    | 10.171 ms`,
   `26115.176 ms | 10.171 ms`,
   `10.171 ms | 4.363 ms`,
   `2.405 ms  | 2.846 ms`,
@@ -48,3 +58,23 @@ const calc = (arr) => {
 
 const times = calc(before);
 console.log('times', times, `\n\n\n`);
+
+const compareToBegin = (arr, initial) => {
+  const convert = initial
+    .split(' ms')
+    .join('')
+    .split(' | ')[0];
+
+  console.log(convert);
+
+  return arr.map((elem) => {
+    let compare = elem
+      .split(' ms')
+      .join('')
+      .split(' | ')[0];
+    return (convert - compare / convert) * 100;
+  });
+};
+
+const initialElems = compareToBegin(before, before[0]);
+console.log('\n initialElems', initialElems);
