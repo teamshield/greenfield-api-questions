@@ -24,7 +24,7 @@
 
 ### Actions Taken
 
-> A docker-compose.yml was set up and run using a build command. 
+> A docker-compose.yml was set up and run using a build command.
 
 ## 6:00 pm - Reseeding Database
 
@@ -49,7 +49,7 @@
 
 > Before/After Partial Indexing
 
-> Initial State: Indexed Table 
+> Initial State: Indexed Table
 > Final State: + Partial Index on questions WHERE reported = 0;
 
 | Table Name  | Before  | After   | % Increase |
@@ -71,23 +71,22 @@
 
 > Initial State: questions was already indexed
 
-| Queries on the Postgres Database                   | Before       | After     | Efficiency |
+| Queries on the Postgres Database                   | Before       | After     | % Increase |
 | -------------------------------------------------- | ------------ | --------- | ---------- |
 | `SELECT ... FROM questions WHERE product_id = ...` | 13.387 ms    | 10.171 ms | 24.0       |
 | `SELECT ...` with new_answers table                | 26115.176 ms | 10.171 ms | 99.9       |
 
-
-> Initial State: Indexed Table 
+> Initial State: Indexed Table
 > Final State: + Partial Index on questions WHERE reported = 0;
 
-| Queries on the Postgres Database                | Before    | After    | Efficiency |
+| Queries on the Postgres Database                | Before    | After    | % Increase |
 | ----------------------------------------------- | --------- | -------- | ---------- |
 | `SELECT * FROM questions ... product_id ...`    | 10.171 ms | 4.363 ms | 57.1       |
 | `SELECT * FROM new_answers ... question_id ...` | 2.405 ms  | 2.846 ms | -18.4      |
 
 > Partials on both
 
-| Queries on the Postgres Database                | Before   | After    | Efficiency |
+| Queries on the Postgres Database                | Before   | After    | % Increase |
 | ----------------------------------------------- | -------- | -------- | ---------- |
 | `SELECT * FROM questions ... product_id ...`    | 4.363 ms | 0.097 ms | 98.0       |
 | `SELECT * FROM new_answers ... question_id ...` | 2.846 ms | 0.057 ms | 99.3       |
@@ -96,25 +95,21 @@
 
 > Indexed on questions and new_answers
 
-| Request | Endpoint                | Before       | After      | Efficiency |
+| Request | Endpoint                | Before       | After      | % Increase |
 | ------- | ----------------------- | ------------ | ---------- | ---------- |
 | GET     | /qa/:productId          | 16770.346 ms | 117.709 ms | 99.3       |
 | GET     | /qa/:questionId/answers | 14710.889 ms | 69.198 ms  | 99.5       |
 
 > Indexed tables from above with "WHERE reported = 0" added for questions
 
-| Request | Endpoint                | Before     | After     | Efficiency |
+| Request | Endpoint                | Before     | After     | % Increase |
 | ------- | ----------------------- | ---------- | --------- | ---------- |
 | GET     | /qa/:productId          | 69.131 ms  | 87.677 ms | -26.8      |
 | GET     | /qa/:questionId/answers | 130.562 ms | 68.126 ms | 47.8       |
 
 > Indexed tables from above with "WHERE reported = 0" added for new_answers
 
-| Request | Endpoint                | Before    | After     | Efficiency |
+| Request | Endpoint                | Before    | After     | % Increase |
 | ------- | ----------------------- | --------- | --------- | ---------- |
 | GET     | /qa/:productId          | 87.677 ms | 75.297 ms | 14.1       |
 | GET     | /qa/:questionId/answers | 68.126 ms | 53.964 ms | 20.8       |
-
-
-
-
