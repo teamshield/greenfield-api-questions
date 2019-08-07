@@ -46,24 +46,24 @@ questions FROM '/Users/charmainetabilas/Desktop/greenfieldApp-api-questions/apiC
 -- HEADERS, 12392946 rows
 -- id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful, photos []
 -- TODO: reseed the database so it has this correct key, WAS question_helpfulness INT
-DROP TABLE IF EXISTS answers;
-CREATE TABLE answers
-(
-  answer_id INT NOT NULL,
-  question_id INT,
-  body TEXT,
-  date date,
-  answerer_name TEXT,
-  answerer_email TEXT,
-  report INT,
-  helpfulness INT,
-  CONSTRAINT "Answers_pkey" PRIMARY KEY
-  (answer_id)
-)
-WITH
-  (
-  OIDS = FALSE
-);
+-- DROP TABLE IF EXISTS answers;
+-- CREATE TABLE answers
+-- (
+--   answer_id INT NOT NULL,
+--   question_id INT,
+--   body TEXT,
+--   date date,
+--   answerer_name TEXT,
+--   answerer_email TEXT,
+--   report INT,
+--   helpfulness INT,
+--   CONSTRAINT "Answers_pkey" PRIMARY KEY
+--   (answer_id)
+-- )
+-- WITH
+--   (
+--   OIDS = FALSE
+-- );
 
 -- COPY answers FROM '/Users/charmainetabilas/Desktop/greenfieldApp-api-questions/apiCSVs/answers.csv' DELIMITERS ',' CSV header;
 

@@ -9,9 +9,9 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_DB=api
       - POSTGRES_PASSWORD=76SPRNG19
-    volumes:
-      - ./db/Schema.sql:/docker-entrypoint-initdb.d/Schema.sql
-      - ./data:/docker-entrypoint-initdb.d/csv
+    build:
+      dockerfile: ./db/Dockerfile
+      context: '.'
   server:
     image: 'ctabilas/api'
     build:
