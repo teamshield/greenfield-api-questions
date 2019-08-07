@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   postgres:
     image: 'postgres:latest'
@@ -8,14 +8,15 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_DB=api
-      - POSTGRES_PASSWORD=TkY1S361HFaF
+      - POSTGRES_PASSWORD="76SPRNG19"
     volumes:
       - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./data:/docker-entrypoint-initdb.d/csv
   server:
     build:
       dockerfile: Dockerfile
-      context: './server'
+      # context: './server'
+      context: '.'
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -25,8 +26,11 @@ services:
       - PGUSER=root
       - PGHOST=postgres
       - PGDATABASE=api
-      - PGPASSWORD=TkY1S361HFaF
+      - PGPASSWORD="76SPRNG19"
       - PGPORT=5432
 volumes:
   database_data:
     driver: local
+
+
+

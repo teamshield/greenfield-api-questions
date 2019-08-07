@@ -1,1 +1,1 @@
-[ ] repopulate database with photos array
+[ ] Look into docker volumes

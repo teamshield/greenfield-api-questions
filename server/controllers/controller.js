@@ -2,24 +2,17 @@ const models = require('../models/models.js');
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
-  console.time();
-  const { product_id, page = 1, count = 5 } = req.params;
-  console.log('product_id: ', product_id, '\n count: ', count);
-  let questionObj = {
-    product_id: product_id,
-    results: []
-  };
-
-  models
-    .dummyModel(product_id, count, questionObj)
-    .then(() => {
-      console.timeEnd();
-      res.send(questionObj);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  res.send(`SDC - test endpoint`);
+  // models
+  //   .dummyModel(product_id, count, questionObj)
+  //   .then(() => {
+  //     console.timeEnd();
+  //     res.send(questionObj);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.sendStatus(500);
+  //   });
 };
 
 // GET Controllers
