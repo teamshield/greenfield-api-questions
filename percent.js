@@ -1,10 +1,37 @@
+const sizes = [
+  '610 MB  | 757 MB',
+  '2869 MB | 3134 MB',
+  '757 MB  | 828 MB',
+  '3134 MB | 3134 MB',
+  '828 MB  | 900 MB',
+  '3134 MB | 3386 MB'
+];
+
+const tableSize = (arr) => {
+  return arr.map((elem) => {
+    let compare = elem
+      .split(' MB')
+      .join('')
+      .split(' | ');
+    return ((compare[1] - compare[0]) / compare[0]) * 100;
+  });
+};
+
+const tableSizes = tableSize(sizes);
+console.log('tableSizes', tableSizes, '\n');
+
 const before = [
-  `0.736 ms | 0.097 ms`,
-  `2.405 ms | 0.158 ms`,
-  `69.131 ms  | 64.397 ms`,
-  `130.562 ms | 120.413 ms`,
-  `64.397 ms  | 41.473 ms`,
-  `120.413 ms | 74.695 ms`
+  `13.387 ms    | 10.171 ms`,
+  `26115.176 ms | 10.171 ms`,
+  `10.171 ms | 4.363 ms`,
+  `2.405 ms  | 2.846 ms`,
+  `2.846 ms | 0.057 ms`,
+  `16770.346 ms | 117.709 ms`,
+  `14710.889 ms | 69.198 ms`,
+  `69.131 ms  | 87.677 ms`,
+  `130.562 ms | 68.126 ms`,
+  `87.677 ms | 75.297 ms`,
+  `68.126 ms | 53.964 ms`
 ];
 
 const data = `0.736 ms | 0.097 ms`;
@@ -15,30 +42,9 @@ const calc = (arr) => {
       .split(' ms')
       .join('')
       .split(' | ');
-    return compare[0] / compare[1];
+    return ((compare[0] - compare[1]) / compare[0]) * 100;
   });
 };
 
 const times = calc(before);
-console.log('times', times);
-
-const sizes = [
-  '534 MB  | 610 MB',
-  '1886 MB | 2151 MB',
-  '2120 MB | 2385 MB',
-  '610 MB  | 757 MB',
-  '2385 MB | 2637 MB'
-];
-
-const calcSize = (arr) => {
-  return arr.map((elem) => {
-    let compare = elem
-      .split(' MB')
-      .join('')
-      .split(' | ');
-    return ((compare[1] - compare[0]) / compare[0]) * 100;
-  });
-};
-
-const tableSizes = calcSize(sizes);
-console.log('tableSizes', tableSizes);
+console.log('times', times, `\n\n\n`);

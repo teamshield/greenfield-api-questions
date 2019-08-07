@@ -8,14 +8,13 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_DB=api
-      - POSTGRES_PASSWORD="76SPRNG19"
+      - POSTGRES_PASSWORD=76SPRNG19
     volumes:
-      - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./db/Schema.sql:/docker-entrypoint-initdb.d/Schema.sql
       - ./data:/docker-entrypoint-initdb.d/csv
   server:
     build:
       dockerfile: Dockerfile
-      # context: './server'
       context: '.'
     volumes:
       - /app/node_modules
@@ -26,11 +25,8 @@ services:
       - PGUSER=root
       - PGHOST=postgres
       - PGDATABASE=api
-      - PGPASSWORD="76SPRNG19"
+      - PGPASSWORD=76SPRNG19
       - PGPORT=5432
 volumes:
-  database_data:
+  qadata:
     driver: local
-
-
-
