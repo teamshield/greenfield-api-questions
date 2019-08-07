@@ -8,7 +8,6 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_DB=api
-      # TODO: what password do we use for this? The one we created in the postgres shell?
       - POSTGRES_PASSWORD="76SPRNG19"
     volumes:
       - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
@@ -16,7 +15,8 @@ services:
   server:
     build:
       dockerfile: Dockerfile
-      context: './server'
+      # context: './server'
+      context: '.'
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -26,8 +26,11 @@ services:
       - PGUSER=root
       - PGHOST=postgres
       - PGDATABASE=api
-      - PGPASSWORD="76SPRNG19\"
+      - PGPASSWORD="76SPRNG19"
       - PGPORT=5432
 volumes:
   database_data:
     driver: local
+
+
+
