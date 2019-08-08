@@ -10,7 +10,7 @@ services:
       - POSTGRES_DB=api
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - /Users/charmainetabilas/Desktop/apiCSVs:/data
+      - /data:/data
   server:
     image: 'ctabilas/api'
     build:
