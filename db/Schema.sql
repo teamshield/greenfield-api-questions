@@ -1,3 +1,6 @@
+-- Run the schema
+-- psql -f Schema.sql api -U me
+
 DROP DATABASE api;
 CREATE DATABASE api;
 
@@ -21,8 +24,8 @@ WITH
 );
 
 
-COPY
-questions FROM '/Users/charmainetabilas/Desktop/greenfieldApp-api-questions/apiCSVs/questions.csv' DELIMITER ',' CSV HEADER;
+
+--  COPY questions FROM '/Users/charmainetabilas/Desktop/apiCSVs/questions.csv' DELIMITERS ',' CSV header;
 
 
 DROP TABLE IF EXISTS new_answers;
@@ -46,4 +49,7 @@ CREATE TABLE new_answers
   OIDS = FALSE
 );
 
+
+
+ COPY new_answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/new_answers.csv' DELIMITERS ',' CSV header;
   

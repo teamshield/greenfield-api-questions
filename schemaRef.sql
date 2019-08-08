@@ -121,21 +121,45 @@ CREATE TABLE new_answers
    OIDS = FALSE
 );
 
--- EXPLAIN analyze SELECT * FROM questions where product_id = 1;
+  -- EXPLAIN analyze SELECT * FROM questions where product_id = 1;
 
--- SIZING TABLES 
--- SELECT pg_size_pretty( pg_total_relation_size('questions'));
--- SELECT pg_size_pretty( pg_total_relation_size('new_answers'));
+  -- SIZING TABLES 
+  -- SELECT pg_size_pretty( pg_total_relation_size('questions'));
+  -- SELECT pg_size_pretty( pg_total_relation_size('new_answers'));
 
--- INDEXING
---  CREATE INDEX ON questions (product_id) ;
--- CREATE INDEX ON new_answers (question_id);
---  CREATE INDEX ON questions (product_id) WHERE reported = 0;
---  CREATE INDEX ON new_answers (question_id) WHERE report = 0;
+  -- INDEXING
+  --  CREATE INDEX ON questions (product_id) ;
+  -- CREATE INDEX ON new_answers (question_id);
+  --  CREATE INDEX ON questions (product_id) WHERE reported = 0;
+  --  CREATE INDEX ON new_answers (question_id) WHERE report = 0;
 
--- EXPAIN
---  EXPLAIN analyze SELECT * FROM questions where product_id = 1;
---  EXPLAIN analyze SELECT * FROM new_answers where question_id = 1;
+  -- EXPAIN
+  --  EXPLAIN analyze SELECT * FROM questions where product_id = 1;
+  --  EXPLAIN analyze SELECT * FROM new_answers where question_id = 1;
 
--- TODO: do not use
--- CREATE INDEX ON answers (question_id);
+  -- TODO: do not use
+  -- CREATE INDEX ON answers (question_id);
+
+
+  DROP TABLE IF EXISTS seeded_answers;
+  CREATE TABLE seeded_answers
+  (
+    answer_id INT NOT NULL,
+    question_id INT,
+    body TEXT,
+    date date,
+    answerer_name TEXT,
+    answerer_email TEXT,
+    report INT,
+    helpfulness INT,
+    photos JSON
+    [],
+  CONSTRAINT "Seeded_Answers_pkey" PRIMARY KEY
+    (answer_id)
+)
+    WITH
+    (
+  OIDS = FALSE
+);
+
+  -- COPY seeded_answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/seeded_answers.csv' DELIMITERS ',' CSV header;
