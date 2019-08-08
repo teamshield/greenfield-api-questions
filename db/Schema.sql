@@ -1,5 +1,5 @@
-DROP DATABASE api;
-CREATE DATABASE api;
+DROP DATABASE greenfield_api;
+CREATE DATABASE greenfield_api;
 
 DROP TABLE IF EXISTS questions;
 CREATE TABLE questions
