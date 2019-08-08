@@ -7,8 +7,8 @@
 -- Questions Schema
 -- CREATE SCHEMA IF NOT EXISTS questions AUTHORIZATION me;
 -- id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful
-DROP DATABASE api;
-CREATE DATABASE api;
+DROP DATABASE greenfield_api;
+CREATE DATABASE greenfield_api;
 
 
 
