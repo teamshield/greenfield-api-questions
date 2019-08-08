@@ -23,9 +23,7 @@ WITH
     OIDS = FALSE
 );
 
-
-
---  COPY questions FROM '/Users/charmainetabilas/Desktop/apiCSVs/questions.csv' DELIMITERS ',' CSV header;
+COPY questions FROM '/data/questions.csv' DELIMITERS ',' CSV header;
 
 
 DROP TABLE IF EXISTS new_answers;
@@ -49,7 +47,5 @@ CREATE TABLE new_answers
   OIDS = FALSE
 );
 
-
-
- COPY new_answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/new_answers.csv' DELIMITERS ',' CSV header;
+COPY new_answers FROM '/data/new_answers.csv' DELIMITERS ',' CSV header;
   
