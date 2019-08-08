@@ -10,7 +10,9 @@ services:
       - POSTGRES_DB=api
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - /data:/data
+      - ../data:/docker-entrypoint-initdb.d/csv
+      - ./db/Schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
   server:
     image: 'ctabilas/api'
     build:

@@ -1,6 +1,3 @@
--- Run the schema
--- psql -f Schema.sql api -U me
-
 DROP DATABASE api;
 CREATE DATABASE api;
 
@@ -23,7 +20,6 @@ WITH
     OIDS = FALSE
 );
 
-COPY questions FROM '/data/questions.csv' DELIMITERS ',' CSV header;
 
 
 DROP TABLE IF EXISTS new_answers;
@@ -47,5 +43,16 @@ CREATE TABLE new_answers
   OIDS = FALSE
 );
 
-COPY new_answers FROM '/data/new_answers.csv' DELIMITERS ',' CSV header;
-  
+-- SEED FUNCTIONS
+COPY questions FROM '/docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV header;
+
+COPY new_answers FROM '/docker-entrypoint-initdb.d/csvnew_answers.csv' DELIMITERS ',' CSV header;
+
+  -- INDEXING
+
+  CREATE INDEX ON questions
+  (product_id);
+  CREATE INDEX ON new_answers
+  (question_id);
+  CREATE INDEX ON questions WHERE reported = 0;
+  CREATE INDEX ON new_answers WHERE report = 0
