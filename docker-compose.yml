@@ -6,16 +6,15 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=root
+      - POSTGRES_USER=postgres
       - POSTGRES_DB=api
-      - POSTGRES_PASSWORD="76SPRNG19"
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - ./data:/docker-entrypoint-initdb.d/csv
+      - /Users/charmainetabilas/Desktop/apiCSVs:/data
   server:
+    image: 'ctabilas/api'
     build:
       dockerfile: Dockerfile
-      # context: './server'
       context: '.'
     volumes:
       - /app/node_modules
@@ -26,11 +25,8 @@ services:
       - PGUSER=root
       - PGHOST=postgres
       - PGDATABASE=api
-      - PGPASSWORD="76SPRNG19"
+      - PGPASSWORD=postgres
       - PGPORT=5432
 volumes:
-  database_data:
+  qadata:
     driver: local
-
-
-
