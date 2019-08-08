@@ -41,9 +41,9 @@ CREATE TABLE new_answers
 );
 
 -- SEED FUNCTIONS
-\COPY questions FROM './docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV header;
+\COPY questions FROM '/docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV header;
 
-\COPY new_answers FROM './docker-entrypoint-initdb.d/csvnew_answers.csv' DELIMITERS ',' CSV header;
+\COPY new_answers FROM '/docker-entrypoint-initdb.d/csv/new_answers.csv' DELIMITERS ',' CSV header;
 
   -- INDEXING
 
