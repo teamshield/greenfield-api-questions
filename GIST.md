@@ -54,7 +54,7 @@
 
 | Table Name  | Before  | After   | % Increase |
 | ----------- | ------- | ------- | ---------- |
-| questions   | 757 MB  | 828 MB  | 9.4        |
+| questions   | 757 MB  | 828 MB  | dh         |
 | new_answers | 3134 MB | 3134 MB | 0          |
 
 > Initial State: Indexed Table + Partial Index on questions WHERE reported = 0;
