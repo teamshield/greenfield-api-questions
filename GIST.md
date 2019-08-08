@@ -44,7 +44,7 @@
 
 | Table Name  | Before  | After   | % Increase |
 | ----------- | ------- | ------- | ---------- |
-| questions   | 610 MB  | 757 MB  | 24.1       |
+| questions   | NA MB   | 610 MB  | 24.1       |
 | new_answers | 2869 MB | 3134 MB | 9.2        |
 
 > Before/After Partial Indexing
@@ -71,25 +71,25 @@
 
 > Initial State: questions was already indexed
 
-| Queries on the Postgres Database                   | Before       | After     | % Increase |
-| -------------------------------------------------- | ------------ | --------- | ---------- |
-| `SELECT ... FROM questions WHERE product_id = ...` | 13.387 ms    | 10.171 ms | 24.0       |
-| `SELECT ...` with new_answers table                | 26115.176 ms | 10.171 ms | 99.9       |
+| Queries on the Postgres Database                   | Before       | After    | % Increase |
+| -------------------------------------------------- | ------------ | -------- | ---------- |
+| `SELECT ... FROM questions WHERE product_id = ...` | NA ms        | 0.288 ms | 24.0       |
+| `SELECT ...` with new_answers table                | 41301.934 ms | 1.014 ms | 99.9       |
 
 > Initial State: Indexed Table
 > Final State: + Partial Index on questions WHERE reported = 0;
 
-| Queries on the Postgres Database                | Before    | After    | % Increase |
-| ----------------------------------------------- | --------- | -------- | ---------- |
-| `SELECT * FROM questions ... product_id ...`    | 10.171 ms | 4.363 ms | 57.1       |
-| `SELECT * FROM new_answers ... question_id ...` | 2.405 ms  | 2.846 ms | -18.4      |
+| Queries on the Postgres Database                | Before   | After    | % Increase |
+| ----------------------------------------------- | -------- | -------- | ---------- |
+| `SELECT * FROM questions ... product_id ...`    | 0.288 ms | 0.284 ms | 57.1       |
+| `SELECT * FROM new_answers ... question_id ...` | 1.014 ms | NA       | NA         |
 
 > Partials on both
 
 | Queries on the Postgres Database                | Before   | After    | % Increase |
 | ----------------------------------------------- | -------- | -------- | ---------- |
-| `SELECT * FROM questions ... product_id ...`    | 4.363 ms | 0.097 ms | 98.0       |
-| `SELECT * FROM new_answers ... question_id ...` | 2.846 ms | 0.057 ms | 99.3       |
+| `SELECT * FROM questions ... product_id ...`    | 0.284 ms | 0.097 ms | 98.0       |
+| `SELECT * FROM new_answers ... question_id ...` | 1.014 ms | 0.376 ms | 99.3       |
 
 ### Recorded Times after queries on endpoints
 
@@ -116,4 +116,4 @@
 
 ### From Initial
 
-> From Initial 
+> From Initial

@@ -59,7 +59,7 @@ const postQuestion = (product_id, reqBody) => {
 };
 
 const postAnswer = (question_id, reqBody) => {
-  const queryEntry = `INSERT INTO answers (body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $, $) RETURNING id `;
+  const queryEntry = `INSERT INTO new_answers (body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $, $) RETURNING id `;
 
   const { body, name, email, photos } = reqBody;
 
@@ -82,13 +82,13 @@ const reportQuestion = (question_id) => {
 
 // Answers
 const helpfulAnswer = (answer_id) => {
-  const queryEntry = `UPDATE answers SET helpfulness = helpfulness + 1 WHERE answer_id = $1`;
+  const queryEntry = `UPDATE new_answers SET helpfulness = helpfulness + 1 WHERE answer_id = $1`;
 
   return db.any(queryEntry, [answer_id]);
 };
 
 const reportAnswer = (answer_id) => {
-  const queryEntry = `UPDATE answers SET report = report + 1 WHERE answer_id = $1`;
+  const queryEntry = `UPDATE new_answers SET report = report + 1 WHERE answer_id = $1`;
 
   return db.any(queryEntry, [answer_id]);
 };

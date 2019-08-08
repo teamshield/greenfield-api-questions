@@ -6,12 +6,14 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=root
+      - POSTGRES_USER=postgres
       - POSTGRES_DB=api
-      - POSTGRES_PASSWORD=76SPRNG19
+      - POSTGRES_PASSWORD=postgres
     build:
       dockerfile: ./db/Dockerfile
       context: '.'
+    volumes:
+      - /Users/charmainetabilas/Desktop/apiCSVs:/data
   server:
     image: 'ctabilas/api'
     build:
@@ -26,7 +28,7 @@ services:
       - PGUSER=root
       - PGHOST=postgres
       - PGDATABASE=api
-      - PGPASSWORD=76SPRNG19
+      - PGPASSWORD=postgres
       - PGPORT=5432
 volumes:
   qadata:

@@ -8,3 +8,4 @@ EXPOSE 4000
 CMD ["npm", "start"]
 
 # Step 2: This will expose our port 
+
