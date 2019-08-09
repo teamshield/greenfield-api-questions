@@ -1,0 +1,31 @@
+version: '3.0'
+services:
+  postgres:
+    image: 'postgres:latest'
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=greenfield_api
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ../data:/docker-entrypoint-initdb.d/csv
+      - ./db/Schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  server:
+    image: 'ctabilas/api'
+    build:
+      dockerfile: Dockerfile
+      context: '.'
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - '4000:4000'
+    environment:
+      - PGUSER=root
+      - PGHOST=postgres
+      - PGDATABASE=api
+      - PGPASSWORD=postgres
+      - PGPORT=5432
