@@ -29,6 +29,3 @@ services:
       - PGDATABASE=api
       - PGPASSWORD=postgres
       - PGPORT=5432
-volumes:
-  qadata:
-    driver: local
