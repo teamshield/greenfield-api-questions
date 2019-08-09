@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 // FIXME: fix this endpoint for testing
-app.get(`/loaderio-d9500f4b2daab81dfdc066475452a953`, (req, res) => {
+app.get(`/loaderio-149d8f70bbf8fb776d822d7916656289`, (req, res) => {
   res.sendFile();
 });
 
