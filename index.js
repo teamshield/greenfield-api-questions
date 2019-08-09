@@ -15,7 +15,7 @@ app.use('/', router);
 
 // FIXME: fix this endpoint for testing
 app.get(`/loaderio-149d8f70bbf8fb776d822d7916656289`, (req, res) => {
-  res.sendFile();
+  res.sendFile(`/home/ec2-user/greenfield-api-questions/loader`);
 });
 
 const PORT = process.env.PORT || 4000;
