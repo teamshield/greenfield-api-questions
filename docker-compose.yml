@@ -24,7 +24,7 @@ services:
     ports:
       - '4000:4000'
     environment:
-      - PGUSER=root
+      - PGUSER=postgres
       - PGHOST=postgres
       - PGDATABASE=greenfield_api
       - PGPASSWORD=postgres
