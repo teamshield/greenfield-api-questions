@@ -4,37 +4,47 @@
 
 ## Log
 
-## 10:00 am - Dockerfile Set Up
+## 10:00 am - Reseed Database locally
 
 #### Challenge/Motivation
 
-> A dockerfile for the project was set up
+> After closer evaluation, some data did not carry over fully from the filestream function
 
 ### Actions Taken
 
-> A container for node and another container for Postgres was set up
+> Ran through the established ETL process
 
-## 6:00 pm - Docker yml file
+## 11: 00 pm - Reconfiguring Docker 
+
+## 12:00 pm - Added static assets in S3 buckets
+
+## 2:00 pm - Deploy an EC2 Instance
 
 ### Challenges/Motivation
 
-> The process of building and running commands on the terminal were getting labor intensive and not sustainable for large scale projects
-
-> A simple route was able to be served
+> The initial attempt in launching an EC2 instance was done on Ubuntu but it would be move difficult to save the static assets this way. 
 
 ### Actions Taken
 
-> A docker-compose.yml was set up and run using a build command.
+> The instance was turned off and instaead, a seperate EC2 instance was created using Amazon's Linus shell. This offered a way to easily pass in the csv files from one service to another. 
+
+> Some reconfiguration on the docker-compose file had to be done in order to reference the new directory located on the instance.
+
+> Eventually, after some additional configuration/reconfiguration, the database began seeding.
+
+> The instance when defined would only accomodate TODO: FIX 8MB so a seperate instance needed to be created which had a larger allotted storage size.
 
 ## 6:00 pm - Reseeding Database
 
 ### Challenges/Motivation
 
-> The database was found to be incomplete because some enteries were not copied over.
+> The postgres and node image created within docker could be pulled into the instance and ran that way. There was an initial issue saying that the database was running when trying to execute the build script so that threw an error into our process.
 
-### Actions Taken
+### 7:00 pm - Seeded the Postgres Database on the EC2 Instance
 
-> Database was reseeded. Runtimes were re-evaluated and were slower given this larger dataset.
+> The initial lines in the schema file that dropped an existing database and then create it were removed. The database creation step was handled through the docker-compose file.
+
+> 
 
 ### Recorded Sizes of Tables
 

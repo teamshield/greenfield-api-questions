@@ -49,7 +49,7 @@ CREATE TABLE new_answers
 
   CREATE INDEX ON questions
   (product_id);
-  -- CREATE INDEX ON questions WHERE reported = 0;
+  -- CREATE INDEX ON questions(product_id) WHERE reported = 0;
   CREATE INDEX ON new_answers
   (question_id);
-  -- CREATE INDEX ON new_answers WHERE report = 0
+  -- CREATE INDEX ON new_answers(question_id) WHERE report = 0
