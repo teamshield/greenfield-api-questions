@@ -13,9 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use('/', router);
 
-// app.get('/', (req, res) => {
-//   res.send(`hello world`);
-// });
+// FIXME: fix this endpoint for testing
+app.get(`/loaderio-d9500f4b2daab81dfdc066475452a953`, (req, res) => {
+  res.sendFile();
+});
 
 const PORT = process.env.PORT || 4000;
 
