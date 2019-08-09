@@ -26,6 +26,6 @@ services:
     environment:
       - PGUSER=root
       - PGHOST=postgres
-      - PGDATABASE=api
+      - PGDATABASE=greenfield_api
       - PGPASSWORD=postgres
       - PGPORT=5432

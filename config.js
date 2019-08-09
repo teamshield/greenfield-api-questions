@@ -1,9 +1,9 @@
 module.exports = {
   PSQL_CONFIG: {
-    user: 'me',
-    host: 'localhost',
-    database: 'api',
-    password: 'hi',
-    port: 5432
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT
   }
 };
