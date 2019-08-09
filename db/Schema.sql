@@ -43,13 +43,13 @@ CREATE TABLE new_answers
 -- SEED FUNCTIONS
 \COPY questions FROM '/docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV header;
 
-  -- \COPY new_answers FROM '/docker-entrypoint-initdb.d/csv/new_answers.csv' DELIMITERS ',' CSV header;
+  \COPY new_answers FROM '/docker-entrypoint-initdb.d/csv/new_answers.csv' DELIMITERS ',' CSV header;
 
   -- INDEXING
 
   CREATE INDEX ON questions
   (product_id);
-  CREATE INDEX ON questions WHERE reported = 0;
-  -- CREATE INDEX ON new_answers
-  -- (question_id);
+  -- CREATE INDEX ON questions WHERE reported = 0;
+  CREATE INDEX ON new_answers
+  (question_id);
   -- CREATE INDEX ON new_answers WHERE report = 0
