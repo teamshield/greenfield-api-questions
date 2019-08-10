@@ -45,3 +45,9 @@
 > The initial lines in the schema file that dropped an existing database and then create it were removed. The database creation step was handled through the docker-compose file.
 
 > 
+
+
+
+Test Results
+get /qa/:productId
+http://bit.ly/2Tm0IZA

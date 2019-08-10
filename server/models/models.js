@@ -57,6 +57,10 @@ const postQuestion = (product_id, reqBody) => {
   const queryEntry = `INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4) RETURNING id`;
 
   const { body, name, email } = reqBody;
+  console.log('reqBody inside Post Question', reqBody);
+  console.log('body inside Post Question', body);
+  console.log('name inside Post Question', name);
+  console.log('email inside Post Question', email);
 
   return db.any(queryEntry, [product_id, body, name, email, photos]);
 };

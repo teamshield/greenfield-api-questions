@@ -40,3 +40,9 @@ router
   .put('/qa/answer/:answer_id/report', reportAnswer);
 
 module.exports = router;
+
+// Questions
+// {"question_body":"What fabric is the top made of?","name":"yankeelover","email":"test@mail.com","photos":[] }
+
+// // Answers
+// {"body":"Its the best! Seriously magic fabric","date":"2018-01-04T00:00:00.000Z","answerer_name":"metslover","helpfulness":7,"photos":[]},
