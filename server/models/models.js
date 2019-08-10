@@ -56,6 +56,8 @@ const getAnswers = (question_id, count = 5, page = 0, data) => {
 const postQuestion = (product_id, reqBody) => {
   const queryEntry = `INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4) RETURNING id`;
 
+  console.log('reqBody inside Post Model', reqBody);
+
   const { body, name, email } = reqBody;
   console.log('reqBody inside Post Question', reqBody);
   console.log('body inside Post Question', body);
