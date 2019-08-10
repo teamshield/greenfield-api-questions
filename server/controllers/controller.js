@@ -2,7 +2,7 @@ const models = require('../models/models.js');
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
-  res.send(`Hi Kevin!!!`);
+  res.send(`Landing`);
 };
 
 // GET Controllers
@@ -13,7 +13,7 @@ const getQuestions = (req, res) => {
 
   const { product_id, count, page } = req.params;
 
-  console.log('req.params inside getQuestions', req.params);
+  console.log('req.params inside getQuestions \n', req.params);
 
   let questionObj = {
     product_id: product_id,
@@ -40,7 +40,7 @@ const getAnswers = (req, res) => {
   const { question_id, page, count } = req.params;
   // const { question_id, count, page } = req.query;
 
-  console.log('req.params inside getAnswers', req.params);
+  console.log('req.params inside getAnswers \n', req.params);
   // console.log('req.params inside getAnswers', typeof parseInt(count, 10));
 
   models

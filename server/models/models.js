@@ -1,6 +1,9 @@
 const db = require('../database.js');
 
-// TEST MODEL
+// Testing for db connection
+// console.log('db from models \n', db);
+
+// TEST MODEL - TODO: delete
 const dummyModel = (product_id, count, data) => {
   const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2`;
 
