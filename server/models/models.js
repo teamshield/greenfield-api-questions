@@ -1,7 +1,7 @@
 const db = require('../database.js');
 
 // Testing for db connection
-// console.log('db from models \n', db);
+console.log('db from models \n', db);
 
 // TEST MODEL - TODO: delete
 const dummyModel = (product_id, count, data) => {
