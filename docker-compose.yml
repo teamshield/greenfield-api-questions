@@ -1,14 +1,14 @@
 version: '3.0'
 services:
-  postgres:
+  db:
     image: 'postgres:latest'
     restart: always
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=POSTGRES
+      - POSTGRES_USER=postgres
       - POSTGRES_DB=api
-      - POSTGRES_PASSWORD=POSTGRES
+      - POSTGRES_PASSWORD=password
     volumes:
       - ../data:/docker-entrypoint-initdb.d/csv
       - ./db/Schema.sql:/docker-entrypoint-initdb.d/schema.sql
@@ -24,8 +24,8 @@ services:
     ports:
       - '4000:4000'
     environment:
-      - PGUSER=root
-      - PGHOST=POSTGRES
+      - PGUSER=postgres
+      - PGHOST=db
       - PGDATABASE=api
-      - PGPASSWORD=POSTGRES
+      - PGPASSWORD=password
       - PGPORT=5432
