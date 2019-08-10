@@ -4,12 +4,9 @@ const db = require('../database.js');
 console.log('db from models \n', db);
 
 // TEST MODEL - TODO: delete
-const dummyModel = (product_id, count, data) => {
-  const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2`;
-
-  return db.any(queryEntry, [product_id, count]).then((result) => {
-    data.results = result;
-  });
+const dummyModel = () => {
+  console.log(`inside test endpoint`);
+  console.log('db from models \n', db);
 };
 
 // GET REQUESTS

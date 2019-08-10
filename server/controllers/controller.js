@@ -2,7 +2,15 @@ const models = require('../models/models.js');
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
-  res.send(`Hi Andrew`);
+  console.log(`inside dummy controller`);
+  models
+    .dummyModel()
+    .then(() => {
+      res.send(`dummy models executed`);
+    })
+    .catch((err) => {
+      console.log('err inside dummy controller from dummy model', err);
+    });
 };
 
 // GET Controllers

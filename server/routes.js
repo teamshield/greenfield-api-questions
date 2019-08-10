@@ -14,7 +14,11 @@ const {
 
 router
   // TEST ROUTES
-  .get('/', dummyController)
+  .get('/', (req, res) => {
+    res.send(`Landing Page`);
+    console.log(`hit landing page`);
+  })
+  .get('/test', dummyController)
 
   // GET ROUTES - Working routes
   // answers - reordered because of confusion with the questions routes
