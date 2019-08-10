@@ -2,7 +2,7 @@ const models = require('../models/models.js');
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
-  res.send(`Landing`);
+  res.send(`Hi Andrew`);
 };
 
 // GET Controllers
