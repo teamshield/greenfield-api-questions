@@ -78,16 +78,16 @@ const postQuestion = (req, res) => {
   console.log('req.params.product_id', req.params.product_id);
   console.log('req.body', req.body);
 
-  const { product_id, body, name, email } = req.body;
+  const { body, name, email } = req.body;
 
   models
-    .postQuestion(product_id, body, name, email)
+    .postQuestion(req.params.product_id, body, name, email)
     .then(() => {
       console.timeEnd();
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.log('err in post Answer \n', err);
+      console.log('err in post Question \n', err);
       res.sendStatus(500);
     });
 };
@@ -95,10 +95,12 @@ const postQuestion = (req, res) => {
 const postAnswer = (req, res) => {
   console.time();
 
-  const { question_id, body, name, email, photos } = req.body;
+  console.log('req.params.product_id', req.params.question_id);
+
+  const { body, name, email, photos } = req.body;
 
   models
-    .postAnswer((question_id, body, name, email, photos))
+    .postAnswer((req.params.question_id, body, name, email, photos))
     .then(() => {
       console.timeEnd();
       res.sendStatus(201);
