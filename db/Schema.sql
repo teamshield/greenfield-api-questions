@@ -43,7 +43,13 @@ CREATE TABLE new_answers
 -- SEED FUNCTIONS
 \COPY questions FROM '/docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV header;
 
-  \COPY new_answers FROM '/docker-entrypoint-initdb.d/csv/new_answers.csv' DELIMITERS ',' CSV header;
+\COPY new_answers FROM '/docker-entrypoint-initdb.d/csv/new_answers.csv' DELIMITERS ',' CSV header;
+
+  -- SETTING INTERVAL
+  SELECT setval('questions_question_id_seq', (SELECT COUNT(*)
+    FROM questions), true);
+  SELECT setval('new_answers_answer_id_seq', (SELECT COUNT(*)
+    FROM new_answers), true);
 
   -- INDEXING
 
