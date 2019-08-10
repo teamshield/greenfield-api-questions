@@ -16,7 +16,6 @@ router
   // TEST ROUTES
   .get('/', dummyController)
   .get('/test/:product_id', dummyController)
-  .post('/test', dummyController)
 
   // GET ROUTES - Working routes
   // answers - reordered because of confusion with the questions routes

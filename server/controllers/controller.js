@@ -3,16 +3,6 @@ const models = require('../models/models.js');
 // Controller for Testing purposes
 const dummyController = (req, res) => {
   res.send(`Hi Kevin!!!`);
-  // models
-  //   .dummyModel(product_id, count, questionObj)
-  //   .then(() => {
-  //     console.timeEnd();
-  //     res.send(questionObj);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     res.sendStatus(500);
-  //   });
 };
 
 // GET Controllers
