@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS questions;
 CREATE TABLE questions
 (
-  question_id INT NOT NULL,
+  question_id SERIAL,
   product_id INT NOT NULL,
   question_body TEXT NOT NULL,
-  question_date date,
+  question_date date not null default CURRENT_DATE,
   asker_name TEXT NOT NULL,
   asker_email TEXT NOT NULL,
   reported INT,
@@ -22,10 +22,10 @@ WITH
 DROP TABLE IF EXISTS new_answers;
 CREATE TABLE new_answers
 (
-  answer_id INT NOT NULL,
+  answer_id SERIAL,
   question_id INT,
   body TEXT,
-  date date,
+  date date not null default CURRENT_DATE,
   answerer_name TEXT,
   answerer_email TEXT,
   report INT,
