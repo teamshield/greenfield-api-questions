@@ -24,7 +24,7 @@ services:
     ports:
       - '4000:4000'
     environment:
-      - PGUSER=POSTGRES
+      - PGUSER=root
       - PGHOST=POSTGRES
       - PGDATABASE=api
       - PGPASSWORD=POSTGRES
