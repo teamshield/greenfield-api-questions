@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 // FIXME: fix this endpoint for testing
-app.get(`loaderio-65d624b227e9a86e64528658b0d9bfbb`, (req, res) => {
+app.get(`loaderio-031062197befdc8047c246214c7f9648`, (req, res) => {
   res.sendFile(`/home/ec2-user/greenfield-api-questions/loader`);
 });
 
