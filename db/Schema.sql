@@ -7,8 +7,8 @@ CREATE TABLE questions
   question_date date not null default CURRENT_DATE,
   asker_name TEXT NOT NULL,
   asker_email TEXT NOT NULL,
-  reported INT,
-  question_helpfulness INT NOT NULL,
+  reported INT DEFAULT 0,
+  question_helpfulness INT DEFAULT 0,
   CONSTRAINT "Questions_pkey" PRIMARY KEY
 (question_id)
 )
@@ -28,8 +28,8 @@ CREATE TABLE new_answers
   date date not null default CURRENT_DATE,
   answerer_name TEXT,
   answerer_email TEXT,
-  report INT,
-  helpfulness INT,
+  report INT DEFAULT 0,
+  helpfulness INT DEFAULT 0,
   photos JSON
   [],
   CONSTRAINT "New_Answers_pkey" PRIMARY KEY
