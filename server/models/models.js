@@ -6,6 +6,9 @@ console.log('db from models \n', db);
 // TEST MODEL - TODO: delete
 const dummyModel = () => {
   console.log(`inside test endpoint`);
+  db.any(`SELECT * FROM questions WHERE product_id = 1`).then((result) => {
+    return result;
+  });
   console.log('db from models \n', db);
 };
 
