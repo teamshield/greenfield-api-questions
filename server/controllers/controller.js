@@ -78,7 +78,7 @@ const postQuestion = (req, res) => {
   console.log('req.params.product_id', req.params.product_id);
   console.log('req.body', req.body);
 
-  const { product_id, body } = req.params;
+  const { product_id, body } = req.body;
 
   models
     .postQuestion(product_id, body)
@@ -95,7 +95,7 @@ const postQuestion = (req, res) => {
 const postAnswer = (req, res) => {
   console.time();
 
-  const { question_id, body } = req.params;
+  const { question_id, body } = req.body;
 
   models
     .postAnswer((question_id, body))
