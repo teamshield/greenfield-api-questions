@@ -44,17 +44,12 @@ const getQuestions = (req, res) => {
 const getAnswers = (req, res) => {
   console.time();
 
-  // TODO: req.param or req.query??? Ask how they were querrying on questions and answers
   const { question_id, page, count } = req.params;
-  // const { question_id, count, page } = req.query;
 
   console.log('req.params inside getAnswers \n', req.params);
-  // console.log('req.params inside getAnswers', typeof parseInt(count, 10));
 
   models
-    // for req.params
-    .getAnswers(question_id, count, page)
-    // .getAnswers(question_id, parseInt(count, 10), page)
+    .getAnswers(question_id, count, page) 
     .then((result) => {
       let data = {
         question: question_id,

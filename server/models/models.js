@@ -1,5 +1,7 @@
 const db = require('../database.js');
 
+// Get request from redis, if not available, check database, on sucess, add to reddis
+
 // Testing for db connection
 console.log('db from models \n', db);
 
@@ -13,6 +15,7 @@ const dummyModel = () => {
 };
 
 // GET REQUESTS
+// TODO: look into db.none and other methods
 const getQuestions = (product_id, count = 5, page = 0, data) => {
   const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2
   OFFSET $3`;
@@ -44,7 +47,6 @@ const getQuestions = (product_id, count = 5, page = 0, data) => {
 };
 
 const getAnswers = (question_id, count = 5, page = 0, data) => {
-  // // FIXME: offsetting
   const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0 LIMIT $2 OFFSET $3`;
 
   const offset = (page + 1) * count;
