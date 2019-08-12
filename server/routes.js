@@ -27,7 +27,6 @@ router
 
   // POST ROUTES
   .post('/qa/:product_id', postQuestion)
-  // post an answer
   .post('/qa/:question_id/answers', postAnswer)
 
   // PUT ROUTES

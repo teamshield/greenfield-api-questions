@@ -17,8 +17,6 @@ const dummyController = (req, res) => {
 
 // Working
 const getQuestions = (req, res) => {
-  console.time();
-
   const { product_id, count, page } = req.params;
 
   console.log('req.params inside getQuestions \n', req.params);
@@ -31,7 +29,6 @@ const getQuestions = (req, res) => {
   models
     .getQuestions(product_id, count, page, questionObj)
     .then(() => {
-      console.timeEnd();
       res.status(200).send(questionObj);
     })
     .catch((err) => {
@@ -42,8 +39,6 @@ const getQuestions = (req, res) => {
 
 // Working
 const getAnswers = (req, res) => {
-  console.time();
-
   const { question_id, page, count } = req.params;
 
   console.log('req.params inside getAnswers \n', req.params);
@@ -58,7 +53,6 @@ const getAnswers = (req, res) => {
         results: result
       };
 
-      console.timeEnd();
       res.status(200).send(data);
     })
     .catch((err) => {
@@ -69,17 +63,16 @@ const getAnswers = (req, res) => {
 
 // POST Methods
 const postQuestion = (req, res) => {
-  console.time();
   console.log('req.params.product_id', req.params.product_id);
-  console.log('req.body', req.body);
 
   const { body, asker_name, email } = req.body;
+  console.log('\n\n\n req.bod inside controllers', req.body, `\n\n`);
 
   models
     .postQuestion(req.params.product_id, body, asker_name, email)
     .then(() => {
-      console.timeEnd();
-      res.sendStatus(201);
+      res.send(`sucess`).status(201);
+      // res.sendStatus(201)
     })
     .catch((err) => {
       console.log('err in post Question \n', err);
@@ -88,8 +81,6 @@ const postQuestion = (req, res) => {
 };
 
 const postAnswer = (req, res) => {
-  console.time();
-
   console.log('req.params.product_id', req.params.question_id);
 
   const { body, answerer_name, email, photos } = req.body;
@@ -97,8 +88,8 @@ const postAnswer = (req, res) => {
   models
     .postAnswer((req.params.question_id, body, answerer_name, email, photos))
     .then(() => {
-      console.timeEnd();
-      res.sendStatus(201);
+      res.send(`sucess`).status(201);
+      // res.sendStatus(201);
     })
     .catch((err) => {
       console.log('err in posting answers', err);
@@ -109,13 +100,10 @@ const postAnswer = (req, res) => {
 // PUT Methods
 // Questions
 const helpfulQuestion = (req, res) => {
-  console.time();
-
   const { question_id } = req.params;
   models
     .helpfulQuestion(question_id)
     .then(() => {
-      console.timeEnd();
       res.sendStatus(204);
     })
     .catch((err) => {
@@ -124,13 +112,10 @@ const helpfulQuestion = (req, res) => {
 };
 
 const reportQuestion = (req, res) => {
-  console.time();
-
   const { question_id } = req.params;
   models
     .reportQuestion(question_id)
     .then(() => {
-      console.timeEnd();
       res.sendStatus(204);
     })
     .catch((err) => {
@@ -140,13 +125,10 @@ const reportQuestion = (req, res) => {
 
 // Answers
 const helpfulAnswer = (req, res) => {
-  console.time();
-
   const { answer_id } = req.params;
   models
     .helpfulAnswer(answer_id)
     .then(() => {
-      console.timeEnd();
       res.sendStatus(204);
     })
     .catch((err) => {
@@ -155,13 +137,10 @@ const helpfulAnswer = (req, res) => {
 };
 
 const reportAnswer = (req, res) => {
-  console.time();
-
   const { answer_id } = req.params;
   models
     .reportAnswer(answer_id)
     .then(() => {
-      console.timeEnd();
       res.sendStatus(204);
     })
     .catch((err) => {

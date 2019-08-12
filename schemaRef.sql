@@ -162,4 +162,13 @@ CREATE TABLE new_answers
   OIDS = FALSE
 );
 
-  -- COPY seeded_answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/seeded_answers.csv' DELIMITERS ',' CSV header;
+    -- COPY seeded_answers FROM '/Users/charmainetabilas/Desktop/apiCSVs/seeded_answers.csv' DELIMITERS ',' CSV header;
+
+    SELECT setval('questions_question_id_seq', (SELECT COUNT(*)
+      FROM questions), true);
+    SELECT setval('new_answers_answer_id_seq', (SELECT COUNT(*)
+      FROM new_answers), true);
+
+
+    SELECT setval('questions_question_id_seq', (SELECT COUNT(*)
+      FROM questions) , true);

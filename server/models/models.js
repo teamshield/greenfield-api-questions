@@ -2,9 +2,6 @@ const db = require('../database.js');
 
 // Get request from redis, if not available, check database, on sucess, add to reddis
 
-// Testing for db connection
-console.log('db from models \n', db);
-
 // TEST MODEL - TODO: delete
 const dummyModel = () => {
   console.log(`inside test endpoint`);
