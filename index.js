@@ -18,6 +18,10 @@ app.get(`/loaderio-031062197befdc8047c246214c7f9648`, (req, res) => {
   res.sendFile('/loader/031062197befdc8047c246214c7f9648.txt');
 });
 
+app.get('/health', (req, res) => {
+  res.send(`health`).status(200);
+});
+
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
