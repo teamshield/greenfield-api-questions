@@ -14,8 +14,8 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 // FIXME: fix this endpoint for testing
-app.get(`/loaderio-031062197befdc8047c246214c7f9648`, (req, res) => {
-  res.sendFile('/loader/031062197befdc8047c246214c7f9648.txt');
+app.get(`/loaderio-d8cce25fbec84fd4dbb8f89d6de3bf65`, (req, res) => {
+  res.sendFile('/loader/d8cce25fbec84fd4dbb8f89d6de3bf65.txt');
 });
 
 app.get('/health', (req, res) => {
