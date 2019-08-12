@@ -49,7 +49,7 @@ const getAnswers = (req, res) => {
   console.log('req.params inside getAnswers \n', req.params);
 
   models
-    .getAnswers(question_id, count, page) 
+    .getAnswers(question_id, count, page)
     .then((result) => {
       let data = {
         question: question_id,
@@ -73,10 +73,10 @@ const postQuestion = (req, res) => {
   console.log('req.params.product_id', req.params.product_id);
   console.log('req.body', req.body);
 
-  const { body, name, email } = req.body;
+  const { body, asker_name, email } = req.body;
 
   models
-    .postQuestion(req.params.product_id, body, name, email)
+    .postQuestion(req.params.product_id, body, asker_name, email)
     .then(() => {
       console.timeEnd();
       res.sendStatus(201);
@@ -92,10 +92,10 @@ const postAnswer = (req, res) => {
 
   console.log('req.params.product_id', req.params.question_id);
 
-  const { body, name, email, photos } = req.body;
+  const { body, answerer_name, email, photos } = req.body;
 
   models
-    .postAnswer((req.params.question_id, body, name, email, photos))
+    .postAnswer((req.params.question_id, body, answerer_name, email, photos))
     .then(() => {
       console.timeEnd();
       res.sendStatus(201);

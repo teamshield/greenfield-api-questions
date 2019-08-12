@@ -55,20 +55,20 @@ const getAnswers = (question_id, count = 5, page = 0, data) => {
 };
 
 // POST REQUESTS
-const postQuestion = (product_id, body, name, email) => {
+const postQuestion = (product_id, body, asker_name, email) => {
   const queryEntry = `INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)`;
 
   console.log('body inside Post Model', body);
-  console.log('name inside Post Question', name);
+  console.log('name inside Post Question', asker_name);
   console.log('email inside Post Question', email);
 
-  return db.any(queryEntry, [product_id, body, name, email]);
+  return db.any(queryEntry, [product_id, body, asker_name, email]);
 };
 
-const postAnswer = (question_id, body, name, email, photos) => {
+const postAnswer = (question_id, body, answerer_name, email, photos) => {
   const queryEntry = `INSERT INTO new_answers (body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $, $)`;
 
-  return db.any(queryEntry, [question_id, body, name, email, photos]);
+  return db.any(queryEntry, [question_id, body, answerer_name, email, photos]);
 };
 
 // PUT REQUESTS
