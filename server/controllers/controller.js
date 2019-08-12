@@ -83,10 +83,12 @@ const postQuestion = (req, res) => {
 const postAnswer = (req, res) => {
   console.log('req.params.product_id', req.params.question_id);
 
-  const { body, answerer_name, email, photos } = req.body;
+  const { body, answerer_name, answerer_email, photos } = req.body;
 
   models
-    .postAnswer((req.params.question_id, body, answerer_name, email, photos))
+    .postAnswer(
+      (req.params.question_id, body, answerer_name, answerer_email, photos)
+    )
     .then(() => {
       res.send(`sucess`).status(201);
       // res.sendStatus(201);
