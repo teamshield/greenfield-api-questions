@@ -63,7 +63,7 @@ const postQuestion = (product_id, body, asker_name, email) => {
 };
 
 const postAnswer = (question_id, body, answerer_name, email, photos) => {
-  const queryEntry = `INSERT INTO new_answers (body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $, $)`;
+  const queryEntry = `INSERT INTO new_answers (question_id, body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $)`;
 
   return db.any(queryEntry, [question_id, body, answerer_name, email, photos]);
 };
