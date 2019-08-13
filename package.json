@@ -10,7 +10,8 @@
     "server": "nodemon index.js",
     "start": "node index.js",
     "seed": "node seedData.js",
-    "percent": "node percent.js"
+    "percent": "node percent.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "concurrently": "^4.1.1",
     "express": "^4.17.1",
     "fast-csv": "^3.4.0",
+    "frisby": "^2.1.2",
+    "jest": "^24.8.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
     "npm": "^6.10.1",

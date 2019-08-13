@@ -65,10 +65,22 @@ You are always a great person to have as part of a team. You always put others b
 
 
 Kevin Park
+Our closet artist and cohort's most improved. You constantly rise to the occassion and we all love how we know you're serious when the shirt goes over your face. You are resilient more than you give yourself credit for and I hope you can always appreciate that about yourself. 
+
 Lance Rutkin
+You're always willing to lend a hand to those around you and our cohort is so much better because of that.
+
 Nicholas Pence
+Quietly the funniest person in the cohort. Your timing is impeccable and you never fail to make us laugh.   
+
 Rob Battaglia
-The man with the most controversial opinions. Like trying to convince us that Ramen is a pasta.
+ROB-E Angelo Gregory. The man with the most controversial opinions. Like trying to convince us that first, ramen is more of a pasta than a soup and then its more of a salad than a pasta. You are one of the few people I know that will see a good habit from someone and then implement it yourself and I hope you never lose that. You also have surprised the cohort with how caring and kind you are .
+
 Soumith Inturi
+Our front end star! Every cohort needs a jack of all trades and we have found that in you. Apprantly someone can spit out code, get on So You Think You Can Dance, be nationaly ranked in Spiderman trivia and HRNYC23's record holder of most naps. So multi-talented! You're so driven and charasmatic and continue to chase your passsions relentlessly. 
+
 Tom Cernera
+You always roll in with the most positive attitude and energy and constantly help bring things into perspective. These kiddos and I always appreciate your great life advise.
+
 Xiao Xie
+You are so intellegent! It seems there is no challenge to great for you and you always rise to the occassion. Thank you for always rising the bar and motivating those around you.
