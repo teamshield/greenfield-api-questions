@@ -71,8 +71,7 @@ const postQuestion = (req, res) => {
   models
     .postQuestion(req.params.product_id, body, asker_name, email)
     .then(() => {
-      res.send(`sucess`).status(201);
-      // res.sendStatus(201)
+      res.sendStatus(201);
     })
     .catch((err) => {
       console.log('err in post Question \n', err);
@@ -81,14 +80,25 @@ const postQuestion = (req, res) => {
 };
 
 const postAnswer = (req, res) => {
-  console.log('req.params.product_id', req.params.question_id);
+  console.log(
+    '\n\n\n CONTROLLERS req.params.product_id',
+    req.params.question_id
+  );
 
-  const { body, answerer_name, answerer_email, photos } = req.body;
+  const { body, answerer_name, email, photos } = req.body;
+
+  console.log(
+    '\n CONTROLLER POST ANSWERS req.body inside controllers',
+    req.body
+  );
+  console.log('body', body);
+  console.log('answerer_name', answerer_name);
+  console.log('email', email);
+  console.log('photos', photos);
 
   models
-    .postAnswer(
-      (req.params.question_id, body, answerer_name, answerer_email, photos)
-    )
+    // .postAnswer(req.params.question_id, body, answerer_name, email)
+    .postAnswer(req.params.question_id, body, answerer_name, email, photos)
     .then(() => {
       res.send(`sucess`).status(201);
       // res.sendStatus(201);

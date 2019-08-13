@@ -51,3 +51,24 @@
 Test Results
 get /qa/:productId
 http://bit.ly/2Tm0IZA
+
+
+
+Andrew Kan
+You are the energy vampire of the cohort and we all admire your work ethic. You are one of the reasons the code output of this cohort has been at insane levels. But you care deeply about the success of our cohort and the juniors and everyone always appreciates your willingness to help. Even though you are the objectively the sassiest person in the cohort.
+
+Brian Nelson
+Our configuration king. The only person I met who thinks that spending an entire day working with YAML is easier than filling out this form <3. You have these bursts of true joy and it brings the energy of the room up much more than you realize.
+
+Hongwei Qin
+You are always a great person to have as part of a team. You always put others before yourself and you do your part in bringing everyone closer to the goal. HRNYC23 would not have survived had you not so couragously saved us from the cockroach.
+
+
+Kevin Park
+Lance Rutkin
+Nicholas Pence
+Rob Battaglia
+The man with the most controversial opinions. Like trying to convince us that Ramen is a pasta.
+Soumith Inturi
+Tom Cernera
+Xiao Xie
