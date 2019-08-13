@@ -40,6 +40,17 @@ describe('GET Answers', () => {
 });
 
 // POSTS TESTS
+describe('POST QUESTIONS', () => {
+  it('should return a 201 status', () => {
+    frisby.post('http://localhost:4000/qa/1/').expect('status', 201);
+  });
+});
+
+describe('POST ANSWERS', () => {
+  it('should return a 201 status', () => {
+    frisby.post('http://localhost:4000/qa/1/answers').expect('status', 201);
+  });
+});
 
 // PUT TESTS
 describe('PUT Question Helpfulness', () => {
