@@ -30,15 +30,15 @@ const getQuestions = async (req, res) => {
 
   const cache = await client.getAsync(url);
   if (cache) {
-    let result = await client.getAsync(url);
+    const result = await client.getAsync(url);
     res.send(JSON.parse(result));
   } else {
     const { product_id, page = 1, count = 5 } = req.params;
-    let offset = parseInt(page) === 1 ? 0 : page * count;
+    const offset = parseInt(page) === 1 ? 0 : page * count;
     model
       .getQuestions(product_id, count, offset)
       .then((results) => {
-        let questionObj = {
+        const questionObj = {
           product_id,
           results
         };
