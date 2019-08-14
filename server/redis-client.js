@@ -18,7 +18,7 @@ client.on('connect', (err) => {
 });
 
 module.exports = {
-  ...client,
+  client,
   getAsync: promisify(client.get).bind(client),
   setAsync: promisify(client.set).bind(client),
   flushAsync: promisify(client.flushdb).bind(client),

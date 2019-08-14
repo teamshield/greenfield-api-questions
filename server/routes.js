@@ -2,17 +2,16 @@ const router = require('express').Router();
 
 const {
   dummyController,
-  getQuestions,
-  // getAnswers,
-  postQuestion,
-  // postAnswer,
-  helpfulQuestion,
-  reportQuestion
-  // helpfulAnswer,
+  getQuestions
+  // ,
+  // // getAnswers,
+  // postQuestion,
+  // // postAnswer,
+  // helpfulQuestion,
+  // reportQuestion
+  // // helpfulAnswer,
   // reportAnswer
 } = require('./controllers/controller.js');
-
-// const controllers = require('./controllers/controller.js');
 
 router
   // TEST ROUTES
@@ -25,18 +24,18 @@ router
   // // GET ROUTES - Working routes
   // // answers - reordered because of confusion with the questions routes
   // .get('/qa/:question_id/answers/:count?/:page?', getAnswers)
-  .get('/qa/:product_id/:count?/:page?', getQuestions)
+  .get('/qa/:product_id/:count?/:page?', getQuestions);
 
-  // POST ROUTES
-  .post('/qa/:product_id', postQuestion)
-  // .post('/qa/:question_id/answers', postAnswer)
+// // POST ROUTES
+// .post('/qa/:product_id', postQuestion)
+// // .post('/qa/:question_id/answers', postAnswer)
 
-  // PUT ROUTES
-  // Questions - Bth routes working
-  .put('/qa/question/:question_id/helpful', helpfulQuestion)
-  .put('/qa/question/:question_id/report', reportQuestion);
+// // PUT ROUTES
+// // Questions - Bth routes working
+// .put('/qa/question/:question_id/helpful', helpfulQuestion)
+// .put('/qa/question/:question_id/report', reportQuestion)
 
-// Answers - Both routes working
+// // Answers - Both routes working
 // .put('/qa/answer/:answer_id/helpful', helpfulAnswer)
 // .put('/qa/answer/:answer_id/report', reportAnswer);
 

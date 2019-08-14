@@ -3,8 +3,6 @@ const { promisify } = require('util');
 const model = require('../models/models.js');
 const client = require('../redis-client.js');
 
-console.log('client', client);
-
 // Controller for Testing purposes
 const dummyController = (req, res) => {
   console.log(`\n\n\n\n inside dummy controller`);
@@ -21,6 +19,10 @@ const dummyController = (req, res) => {
       console.log('err inside dummy controller from dummy model', err);
     });
 };
+
+// const getQuestions = (req, res) => {
+//   res.send(`hello`);
+// };
 
 // GET REQUESTS
 const getQuestions = async (req, res) => {
