@@ -5,106 +5,100 @@ const db = require('../database.js');
 // TEST MODEL - TODO: delete
 const dummyModel = () => {
   console.log(`inside test endpoint`);
-  db.any(`SELECT * FROM questions WHERE product_id = 1`).then((result) => {
-    return result;
-  });
-  console.log('db from models \n', db);
+  db.any(`SELECT * FROM questions WHERE product_id = 1`)
+    .then((result) => {
+      console.log('result in models', result);
+      return result;
+    })
+    .catch((err) => {
+      console.log('err inside dummy model', err);
+    });
 };
 
 // GET REQUESTS
-// TODO: look into db.none and other methods
-const getQuestions = (product_id, count = 5, page = 0, data) => {
-  const queryEntry = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2
-  OFFSET $3`;
+const getQuestions = (product_id, count, offset) => {
+  const questionQuery = `SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2 OFFSET $3`;
 
-  const offset = (parseInt(page, 10) + 1) * parseInt(count, 10);
+  const answersQuery = `SELECT answer_id AS id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0`;
 
-  console.log('\n\n page: ', page);
-  console.log('count', count);
-  console.log('offset', offset);
+  return db.tx((t) => {
+    return t
+      .map(questionQuery, [product_id, count, offset], (question) => {
+        question.answers = {};
+        return t.any(answersQuery, [question.question_id]).then((answers) => {
+          for (let answer of answers) {
+            question.answers[answer.id] = answer;
+          }
+          return question;
+        });
+      })
+      .then(t.batch);
+  });
+};
 
+const getAnswers = (question_id, count, offset) => {
+  return db.any(
+    `SELECT answer_id, body, date, answerer_name, helpfulness, photos 
+        FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2 OFFSET $3`,
+    [question_id, count, offset]
+  );
+};
+
+// POST REQUESTS
+const postQuestion = (product_id, { body, name, email }) => {
+  const questionQuery = `INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)`;
+  return db.any(questionQuery, [product_id, body, name, email]);
+};
+const postAnswer = (question_id, { body, name, email, photos }) => {
   return db
-    .any(queryEntry, [product_id, count, page, offset])
-    .then((result) => {
-      data.results = result;
-
-      const answerQuery = `SELECT answer_id AS id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0`;
-
+    .one(
+      `INSERT INTO answers (question_id, body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4) RETURNING answer_id`,
+      [question_id, body, name, email]
+    )
+    .then(({ answer_id }) => {
       return Promise.all(
-        data.results.map((question) => {
-          question.answers = {};
-          return db.any(answerQuery, [question.question_id]).then((answers) => {
-            answers.forEach((answer) => {
-              question.answers[answer.id] = answer;
+        photos.map((url) => {
+          //insert the url and return the id
+          //insert into answer photos object containing returned id and url
+          return db
+            .one(
+              `INSERT INTO photos (answer_id, url) VALUES ($1, $2) RETURNING id;`,
+              [answer_id, url]
+            )
+            .then(({ id }) => {
+              let photo = JSON.stringify({ id, url });
+              return db.any(
+                `UPDATE answers SET photos = photos || $1::jsonb WHERE answer_id = $2;`,
+                [photo, answer_id]
+              );
             });
-          });
         })
       );
     });
 };
 
-const getAnswers = (question_id, count = 5, page = 0, data) => {
-  const queryEntry = `SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM new_answers WHERE question_id = $1 AND report = 0 LIMIT $2 OFFSET $3`;
-
-  const offset = (page + 1) * count;
-
-  return db.any(queryEntry, [question_id, count, page, offset]);
-};
-
-// POST REQUESTS
-const postQuestion = (product_id, body, asker_name, email) => {
-  const queryEntry = `INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)`;
-
-  console.log('body inside Post Model', body);
-  console.log('name inside Post Question', asker_name);
-  console.log('email inside Post Question', email);
-
-  return db.any(queryEntry, [product_id, body, asker_name, email]);
-};
-
-const postAnswer = (question_id, body, answerer_name, email, photos) => {
-  console.log(`\n\n\n INSIDE ANSERS MODELS`);
-  console.log('question_id', question_id);
-  console.log('body inside Post Model', body);
-  console.log('name inside Post Answers', answerer_name);
-  console.log('email inside Post Answers', email);
-
-  const queryEntry = `INSERT INTO new_answers (question_id, body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $)`;
-  return db.any(queryEntry, [question_id, body, answerer_name, email, photos]);
-};
-
-// TESTING ANSWERS
-// const postAnswer = (question_id, body, asker_name, email) => {
-//   const queryEntry = `INSERT INTO questions (question_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)`;
-
-// return db.any(queryEntry, [question_id, body, asker_name, email]);
-// };
-
 // PUT REQUESTS
 // Questions
 const helpfulQuestion = (question_id) => {
-  const queryEntry = `UPDATE questions SET question_helpfulness = question_helpfulness + 1 WHERE question_id = $1`;
-
-  return db.any(queryEntry, [question_id]);
+  const questionQuery = `UPDATE questions SET question_helpfulness = question_helpfulness + 1 where question_id = $1;`;
+  return db.none(questionQuery, [question_id]);
 };
-
 const reportQuestion = (question_id) => {
-  const queryEntry = `UPDATE questions SET reported = reported + 1 WHERE question_id = $1`;
-
-  return db.any(queryEntry, [question_id]);
+  const questionQuery = `UPDATE questions SET reported = 1 where question_id = $1;`;
+  return db.none(questionQuery, [question_id]);
 };
 
 // Answers
 const helpfulAnswer = (answer_id) => {
-  const queryEntry = `UPDATE new_answers SET helpfulness = helpfulness + 1 WHERE answer_id = $1`;
-
-  return db.any(queryEntry, [answer_id]);
+  return db.none(
+    `UPDATE answers SET helpfulness = helpfulness + 1 WHERE answer_id = $1;`,
+    [answer_id]
+  );
 };
-
 const reportAnswer = (answer_id) => {
-  const queryEntry = `UPDATE new_answers SET report = report + 1 WHERE answer_id = $1`;
-
-  return db.any(queryEntry, [answer_id]);
+  return db.none(`UPDATE answers SET report = 1 WHERE answer_id = $1;`, [
+    answer_id
+  ]);
 };
 
 module.exports = {

@@ -1,59 +1,100 @@
-const models = require('../models/models.js');
+const { promisify } = require('util');
+
+const model = require('../models/models.js');
+const client = require('../redis-client.js');
+
+console.log('client', client);
 
 // Controller for Testing purposes
 const dummyController = (req, res) => {
-  console.log(`inside dummy controller`);
-  models
+  console.log(`\n\n\n\n inside dummy controller`);
+  // res.send(`hello world`);
+
+  model
     .dummyModel()
-    .then(() => {
-      res.send(`dummy models executed`);
+    .then((result) => {
+      console.log('result inside controller', result);
+      // res.send(`dummy models executed`);
+      res.send(result).status(200);
     })
     .catch((err) => {
       console.log('err inside dummy controller from dummy model', err);
     });
 };
 
-// GET Controllers
+// GET REQUESTS
+const getQuestions = async (req, res) => {
+  // redis cache implementation
+  const url = `${req.headers.host}${req.url}`;
+  console.log('url', url);
 
-// Working
-const getQuestions = (req, res) => {
-  const { product_id, count, page } = req.params;
-
-  console.log('req.params inside getQuestions \n', req.params);
-
-  let questionObj = {
-    product_id: product_id,
-    results: []
-  };
-
-  models
-    .getQuestions(product_id, count, page, questionObj)
-    .then(() => {
-      res.status(200).send(questionObj);
-    })
-    .catch((err) => {
-      console.log('err in Get Request', err);
-      res.sendStatus(500);
-    });
+  const cache = await client.getAsync(url);
+  if (cache) {
+    let result = await client.getAsync(url);
+    res.send(JSON.parse(result));
+  } else {
+    const { product_id, page = 1, count = 5 } = req.params;
+    let offset = parseInt(page) === 1 ? 0 : page * count;
+    model
+      .getQuestions(product_id, count, offset)
+      .then((results) => {
+        let questionObj = {
+          product_id,
+          results
+        };
+        return client.setAsync(url, JSON.stringify(questionObj)).then(() => {
+          res.send(questionObj);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
 };
 
-// Working
-const getAnswers = (req, res) => {
-  const { question_id, page, count } = req.params;
+const getAnswers = async (req, res) => {
+  const url = req.headers.host + '/' + req.url;
+  const cache = await client.getAsync(url);
 
-  console.log('req.params inside getAnswers \n', req.params);
+  if (cache) {
+    const result = await client.getAsync(url);
+    res.send(JSON.parse(result));
+  } else {
+    const { question_id, page = 1, count = 5 } = req.params;
+    const offset = parseInt(page) === 1 ? 0 : page * count;
 
-  models
-    .getAnswers(question_id, count, page)
-    .then((result) => {
-      let data = {
-        question: question_id,
-        page: page - 1,
-        count: count,
-        results: result
-      };
+    model
+      .getAnswers(question_id, count, offset)
+      .then((result) => {
+        const answerObj = {
+          question: question_id,
+          page: page,
+          count: count,
+          results: result
+        };
+        return client
+          .setAsync(url, JSON.stringify(answerObj))
+          .then((result) => {
+            res.send(answerObj);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+};
 
-      res.status(200).send(data);
+// POST REQUESTS
+const postQuestion = (req, res) => {
+  const { product_id } = req.params;
+  const { body } = req;
+
+  model
+    .postQuestion(product_id, body)
+    .then(() => {
+      res.sendStatus(201);
     })
     .catch((err) => {
       console.log(err);
@@ -61,102 +102,74 @@ const getAnswers = (req, res) => {
     });
 };
 
-// POST Methods
-const postQuestion = (req, res) => {
-  console.log('req.params.product_id', req.params.product_id);
+const postAnswer = (req, res) => {
+  const { question_id } = req.params;
+  const { body } = req;
 
-  const { body, asker_name, email } = req.body;
-  console.log('\n\n\n req.bod inside controllers', req.body, `\n\n`);
-
-  models
-    .postQuestion(req.params.product_id, body, asker_name, email)
+  model
+    .postAnswer(question_id, body)
     .then(() => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.log('err in post Question \n', err);
+      console.log(err);
       res.sendStatus(500);
     });
 };
 
-const postAnswer = (req, res) => {
-  console.log(
-    '\n\n\n CONTROLLERS req.params.product_id',
-    req.params.question_id
-  );
-
-  const { body, answerer_name, email, photos } = req.body;
-
-  console.log(
-    '\n CONTROLLER POST ANSWERS req.body inside controllers',
-    req.body
-  );
-  console.log('body', body);
-  console.log('answerer_name', answerer_name);
-  console.log('email', email);
-  console.log('photos', photos);
-
-  models
-    // .postAnswer(req.params.question_id, body, answerer_name, email)
-    .postAnswer(req.params.question_id, body, answerer_name, email, photos)
-    .then(() => {
-      res.send(`sucess`).status(201);
-      // res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.log('err in posting answers', err);
-      res.sendStatus(500);
-    });
-};
-
-// PUT Methods
+// PUT REQUETS
 // Questions
 const helpfulQuestion = (req, res) => {
   const { question_id } = req.params;
-  models
+  model
     .helpfulQuestion(question_id)
     .then(() => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('err in helpfulQuestion', err).sendStatus(500);
+      console.log(err);
+      res.sendStatus(500);
     });
 };
 
 const reportQuestion = (req, res) => {
   const { question_id } = req.params;
-  models
+  model
     .reportQuestion(question_id)
     .then(() => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('err in report answers \n', err).sendStatus(500);
+      console.log(err);
+      res.sendStatus(500);
     });
 };
 
 // Answers
 const helpfulAnswer = (req, res) => {
   const { answer_id } = req.params;
-  models
+  model
     .helpfulAnswer(answer_id)
     .then(() => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('err in helpfulAnswer', err).sendStatus(500);
+      console.log(err);
+      res.sendStatus(500);
     });
 };
 
 const reportAnswer = (req, res) => {
   const { answer_id } = req.params;
-  models
+
+  model
     .reportAnswer(answer_id)
     .then(() => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('err in report answers \n', err).sendStatus(500);
+      console.log(err);
+      res.sendStatus(500);
     });
 };
 
