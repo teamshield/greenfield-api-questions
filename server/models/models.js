@@ -19,10 +19,6 @@ const getQuestions = (product_id, count = 5, page = 0, data) => {
 
   const offset = (parseInt(page, 10) + 1) * parseInt(count, 10);
 
-  console.log('\n\n page: ', page);
-  console.log('count', count);
-  console.log('offset', offset);
-
   return db
     .any(queryEntry, [product_id, count, page, offset])
     .then((result) => {
@@ -55,30 +51,13 @@ const getAnswers = (question_id, count = 5, page = 0, data) => {
 const postQuestion = (product_id, body, asker_name, email) => {
   const queryEntry = `INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)`;
 
-  console.log('body inside Post Model', body);
-  console.log('name inside Post Question', asker_name);
-  console.log('email inside Post Question', email);
-
   return db.any(queryEntry, [product_id, body, asker_name, email]);
 };
 
 const postAnswer = (question_id, body, answerer_name, email, photos) => {
-  console.log(`\n\n\n INSIDE ANSERS MODELS`);
-  console.log('question_id', question_id);
-  console.log('body inside Post Model', body);
-  console.log('name inside Post Answers', answerer_name);
-  console.log('email inside Post Answers', email);
-
   const queryEntry = `INSERT INTO new_answers (question_id, body, answerer_name, answerer_email, photos) VALUES ($, $, $, $, $)`;
   return db.any(queryEntry, [question_id, body, answerer_name, email, photos]);
 };
-
-// TESTING ANSWERS
-// const postAnswer = (question_id, body, asker_name, email) => {
-//   const queryEntry = `INSERT INTO questions (question_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)`;
-
-// return db.any(queryEntry, [question_id, body, asker_name, email]);
-// };
 
 // PUT REQUESTS
 // Questions

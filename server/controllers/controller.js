@@ -41,8 +41,6 @@ const getQuestions = (req, res) => {
 const getAnswers = (req, res) => {
   const { question_id, page, count } = req.params;
 
-  console.log('req.params inside getAnswers \n', req.params);
-
   models
     .getAnswers(question_id, count, page)
     .then((result) => {
@@ -63,10 +61,7 @@ const getAnswers = (req, res) => {
 
 // POST Methods
 const postQuestion = (req, res) => {
-  console.log('req.params.product_id', req.params.product_id);
-
   const { body, asker_name, email } = req.body;
-  console.log('\n\n\n req.bod inside controllers', req.body, `\n\n`);
 
   models
     .postQuestion(req.params.product_id, body, asker_name, email)
@@ -86,15 +81,6 @@ const postAnswer = (req, res) => {
   );
 
   const { body, answerer_name, email, photos } = req.body;
-
-  console.log(
-    '\n CONTROLLER POST ANSWERS req.body inside controllers',
-    req.body
-  );
-  console.log('body', body);
-  console.log('answerer_name', answerer_name);
-  console.log('email', email);
-  console.log('photos', photos);
 
   models
     // .postAnswer(req.params.question_id, body, answerer_name, email)
