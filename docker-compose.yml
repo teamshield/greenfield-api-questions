@@ -13,10 +13,7 @@ services:
       - ../data:/docker-entrypoint-initdb.d/csv
       - ./db/Schema.sql:/docker-entrypoint-initdb.d/schema.sql
   redis_db:
-    image: redis
-    container_name: cache
-    expose:
-      - 6379
+    image: redis:latest
   server:
     image: 'ctabilas/api'
     build:
@@ -33,4 +30,4 @@ services:
       - PGDATABASE=api
       - PGPASSWORD=password
       - PGPORT=5432
-      - REDIS_URL=redis://redis_db
+      - redisHOST=redis_db

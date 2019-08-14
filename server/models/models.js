@@ -5,14 +5,14 @@ const db = require('../database.js');
 // TEST MODEL - TODO: delete
 const dummyModel = () => {
   console.log(`inside test endpoint`);
-  db.any(`SELECT * FROM questions WHERE product_id = 1`)
-    .then((result) => {
-      console.log('result in models', result);
-      return result;
-    })
-    .catch((err) => {
-      console.log('err inside dummy model', err);
-    });
+  return db.any(`SELECT * FROM questions WHERE product_id = 1`)
+    // .then((result) => {
+    //   console.log('result in models', result);
+    //   return result;
+    // })
+    // .catch((err) => {
+    //   console.log('err inside dummy model', err);
+    // });
 };
 
 // GET REQUESTS

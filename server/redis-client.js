@@ -1,8 +1,9 @@
 const redis = require('redis');
 const { promisify } = require('util');
+
 const client = redis.createClient({
   port: 6379,
-  host: process.env.REDIS_URL || '120.0.0.1'
+  host: process.env.redisHOST || '120.0.0.1'
 });
 
 client.on('connect', (err) => {
@@ -17,10 +18,7 @@ client.on('connect', (err) => {
   });
 });
 
-module.exports = {
-  client,
-  getAsync: promisify(client.get).bind(client),
-  setAsync: promisify(client.set).bind(client),
-  flushAsync: promisify(client.flushdb).bind(client),
-  keysAsync: promisify(client.keys).bind(client)
-};
+// TODO: double check this
+promisify(client);
+
+module.exports = client;
