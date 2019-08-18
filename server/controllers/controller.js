@@ -4,21 +4,21 @@ const model = require('../models/models.js');
 const client = require('../redis-client.js');
 
 // Controller for Testing purposes
-const dummyController = (req, res) => 
+const dummyController = (req, res) =>
   console.log(`\n\n\n\n inside dummy controller`);
-  // res.send(`hello world`);
+// res.send(`hello world`);
 
-  model
-    .dummyModel()
-    .then((result) => {
-      console.log('result inside controller', result);
-      // res.send(`dummy models executed`);
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.log('err inside dummy controller from dummy model', err);
-    });
-};
+model
+  .dummyModel()
+  .then((result) => {
+    console.log('result inside controller', result);
+    // res.send(`dummy models executed`);
+    res.send(result).status(200);
+  })
+  .catch((err) => {
+    console.log('err inside dummy controller from dummy model', err);
+  });
+// };
 
 // const getQuestions = (req, res) => {
 //   res.send(`hello`);
