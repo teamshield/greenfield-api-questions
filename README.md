@@ -35,10 +35,6 @@ Postgres was used as the database, Docker was used in order to quickly horizonta
 - `npm install` - install dependencies
 - `npm start` - start the server in production
 
-> Alternatively run the following script to simultaneously run the server and build
-
-- `npm run dev` - concurrently start the server and build the front end
-
 * Navigate to http://localhost:4000/
 
 ## Technologies-Used
@@ -93,13 +89,14 @@ Ensure that the following modules are installed before running `npm install`
 > Initial Data and results from testing the system can be viewed in charts and tables are provided in this [results page](https://www.evernote.com/l/Arqq2XYRMLZG6pQQ-2lcBz2d91dkcKOIV8E).
 
 > Below are examples of the data that was gathered at different intervals of the project.
-> System Overview:
+
+> System Overview sample:
 
 <p align="center">
 <img src="documentation/overview.gif">
 </p>
 
-> Loader.io Tests
+> Loader.io Tests sample:
 <p align="center">
 <img src="documentation/loadio.gif">
 </p>
