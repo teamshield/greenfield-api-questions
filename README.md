@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/teamuru/greenfieldApp.svg?branch=master)](https://travis-ci.org/teamuru/greenfieldApp)
 
-# Green Field App Documentation
+# Green Field Questions and Answers API Documentation
 
 <!-- INSERT GIF OF OVERALL APP HERE -->
 
@@ -15,7 +14,7 @@ A two person dev team created ...
 
 ## Table of Contents
 
-- [Green Field App Documentation](#green-field-app-documentation)
+- [Green Field Questions and Answers API Documentation](#green-field-questions-and-answers-api-documentation)
   - [Table of Contents](#table-of-contents)
   - [Installing-Dependencies](#installing-dependencies)
   - [Technologies-Used](#technologies-used)
@@ -72,7 +71,7 @@ Ensure that the following modules are installed before running `npm install`
 | GET          | /qa/:questionId/answers                             | An object cotaining answers related a question                 | 200    |
 | POST         | /qa/:productId                                      |                                                                | 201    |
 | POST         | /qa/:questionId/answers                             |                                                                | 201    |
-| PUT          | /qa/question/:**question_id**/helpful                   |                                                                | 204    |
+| PUT          | /qa/question/:**question_id**/helpful               |                                                                | 204    |
 | PUT          | /qa/question/:question_id/report                    |                                                                | 204    |
 | PUT          | /qa/answer/:answer_id/helpful                       |                                                                | 204    |
 | PUT          | /qa/:questionId/answers/qa/answer/:answer_id/report |                                                                | 204    |

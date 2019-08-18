@@ -4,7 +4,7 @@ const model = require('../models/models.js');
 const client = require('../redis-client.js');
 
 // Controller for Testing purposes
-const dummyController = (req, res) => {
+const dummyController = (req, res) => 
   console.log(`\n\n\n\n inside dummy controller`);
   // res.send(`hello world`);
 
