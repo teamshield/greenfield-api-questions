@@ -7,6 +7,8 @@ The goal of this project was to design a system that can at least handle 100 req
 
 Data to be the generated came from 3 csv's with millions of records. The provided csv's were one containing questions, answers, and the third was photos associated with specific a specific answer. Due to the relational nature of the data, Postgres was chosed as the database. An ETL process was implemented using the fs module to consolidate answer data within a single file.
 
+Postgres was used as the database, Docker was used in order to quickly horizontally scale the system.
+
 <p align="center">
 <img src="documentation/logos.png">
 </p>
@@ -46,7 +48,9 @@ Data to be the generated came from 3 csv's with millions of records. The provide
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com)
 - [Postgres](https://www.postgresql.org/)
-  <!-- - [Mongo] -->
+- [Docker](https://www.docker.com)
+- [Redis](https://redis.io/)
+
 
 > Continuous Integration
 
@@ -67,20 +71,20 @@ Ensure that the following modules are installed before running `npm install`
 
 > Listed are available routes that can be handled by the API.
 
-| Request Type | Endpoint                                            | Returns                                                        | Status |
-| ------------ | --------------------------------------------------- | -------------------------------------------------------------- | ------ |
-| GET          | /qa/:productId                                      | An object containing questions related to a particular product | 200    |
-| GET          | /qa/:questionId/answers                             | An object cotaining answers related a question                 | 200    |
-| POST         | /qa/:productId                                      |                                                                | 201    |
-| POST         | /qa/:questionId/answers                             |                                                                | 201    |
-| PUT          | /qa/question/:**question_id**/helpful               |                                                                | 204    |
-| PUT          | /qa/question/:question_id/report                    |                                                                | 204    |
-| PUT          | /qa/answer/:answer_id/helpful                       |                                                                | 204    |
-| PUT          | /qa/:questionId/answers/qa/answer/:answer_id/report |                                                                | 204    |
+| Request Type | Endpoint                          | Returns                                                                                                               | Status |
+| ------------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------ |
+| GET          | /qa/:productId                    | An object containing questions related to a particular product along with answers/photos associated with the question | 200    |
+| GET          | /qa/:questionId/answers           | An object cotaining answers and photos related a question                                                             | 200    |
+| POST         | /qa/:productId                    | Nothing is returned but serves a route to post questions about specific product                                       | 201    |
+| POST         | /qa/:questionId/answers           | Nothing is returned but this route serves handling posting answers about a specfic question                           | 201    |
+| PUT          | /qa/question/:question_id/helpful | A counter associated with the question is incremented up                                                              | 204    |
+| PUT          | /qa/question/:question_id/report  | The question will not get deleted but it will no longer be returned upon making a GET request for the questions route | 204    |
+| PUT          | /qa/answer/:answer_id/helpful     | A counter associated with the question is incremented up                                                              | 204    |
+| PUT          | /qa/answer/:answer_id/report      | The specific response will no longer be returned  upon making a GET request to the answers route                      | 204    |
 
 ## API
 
-> Comments here
+> TODO: ADD NOTES HERE
 
 ## Engineering Journal
 
