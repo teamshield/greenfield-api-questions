@@ -25,9 +25,9 @@
   "homepage": "https://github.com/teamshield/greenfield-api-questions#readme",
   "dependencies": {
     "axios": "^0.19.0",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "concurrently": "^4.1.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "fast-csv": "^3.4.0",
     "frisby": "^2.1.2",
     "jest": "^24.8.0",
